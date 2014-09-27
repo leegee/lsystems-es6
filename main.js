@@ -20,8 +20,8 @@ var presets = [ {
 		angle: 40,
 		init_x: 0,
 		init_y: 0,
-    // canvas_width: 900,
-    // canvas_height: 600,
+		// canvas_width: 900,
+		// canvas_height: 600,
 		turtle_step_x: 5,
 		turtle_step_y: 5,
 		generations: 5,
@@ -203,6 +203,14 @@ var presets = [ {
 ];
 
 var options = presets[ 0 ];
-options.canvas = ( document.getElementsByTagName( 'canvas' )[ 0 ] );
+var body = ( document.getElementsByTagName( 'body' )[ 0 ] );
+options.canvas = document.createElement( 'canvas' );
+options.canvas.width = 900;
+options.canvas.height = 600;
+body.appendChild( options.canvas );
+
+// for (var init_x = 400; init_x < 1200; init_x += 400){
+
+// }
 var lsys = new Lsys( options );
 lsys.generate( options.generations );
