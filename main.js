@@ -1,8 +1,5 @@
-var Lsys = require( "./lib/LsysParametricAMD.js" );
-
-console.log( "%O", Lsys )
-
 "use strict";
+var Lsys = require( "./lib/LsysParametricAMD.js" );
 
 var LOGGER = console; // log4javascript.getLogger();
 // var LOGGER = log4javascript.getDefaultLogger();
@@ -13,12 +10,6 @@ var LOGGER = console; // log4javascript.getLogger();
          appender.setThreshold(log4javascript.Level.INFO);
          LOGGER.addAppender(appender);
         */
-
-function playSound( audioURL ) {
-	if ( document.all ) document.all[ 'BGSOUND_ID' ].src = audioURL;
-	else document.getElementById( 'iplayer' ).setAttribute( 'src',
-		'jsplayer.html?' + audioURL );
-}
 
 var presets = [ {
 		title: 'Tree Balanced',
@@ -36,7 +27,9 @@ var presets = [ {
 		generations: 2,
 		line_width: 2,
 		wrap_angle_at: 0
-	}, { // list all, even unused, keys on this first eleemnt
+	},
+
+	{ // list all, even unused, keys on this first eleemnt
 		title: 'Parametric test',
 		variables: "#define $W 0.5\n" +
 			"#define $AS  2\n" +
@@ -73,7 +66,9 @@ var presets = [ {
 		generations: 5,
 		line_width: 1,
 		wrap_angle_at: 12
-	}, {
+	},
+
+	{
 		title: 'Tree x',
 		variables: '',
 		rules: "X->C0F-[C2[X]+C3X]+C1F[C3+FX]-X\nF->FF",
@@ -103,7 +98,9 @@ var presets = [ {
 		generations: 6,
 		line_width: 3,
 		wrap_angle_at: 12
-	}, {
+	},
+
+	{
 		title: 'Sierpinski Median Curve (2 gens)',
 		variables: '',
 		rules: "L->+R-F-R+\nR->-L+F+L-",
@@ -118,7 +115,9 @@ var presets = [ {
 		generations: 2,
 		line_width: 3,
 		wrap_angle_at: 12
-	}, {
+	},
+
+	{
 		title: 'Sierpinski Median Curve (4 gens)',
 		variables: '',
 		rules: "L->+R-F-R+\nR->-L+F+L-",
@@ -133,7 +132,9 @@ var presets = [ {
 		generations: 4,
 		line_width: 3,
 		wrap_angle_at: 12
-	}, {
+	},
+
+	{
 		title: 'Koch Snowflake',
 		variables: '',
 		rules: "F->F-F++F-F\nX->FF",
@@ -148,7 +149,9 @@ var presets = [ {
 		generations: 4,
 		line_width: 6,
 		wrap_angle_at: 12
-	}, {
+	},
+
+	{
 		title: 'Tree 3',
 		variables: '',
 		rules: 'F -> FF-[-F+F]+[+F-F]',
@@ -162,7 +165,9 @@ var presets = [ {
 		turtle_step_y: 4,
 		generations: 5,
 		wrap_angle_at: 12
-	}, {
+	},
+
+	{
 		title: 'Tree 4',
 		variables: '',
 		rules: "F -> F[-FF]F[+FF]F",
@@ -176,7 +181,9 @@ var presets = [ {
 		turtle_step_y: 4,
 		generations: 5,
 		wrap_angle_at: 12
-	}, {
+	},
+
+	{
 		title: 'Dragon Curve',
 		variables: '',
 		rules: "X->X+YF\nY->FX-Y",
@@ -194,16 +201,5 @@ var presets = [ {
 	}
 ];
 
-var lsys = null;
-var el_canvases = document.getElementById( 'canvases' );
-var contentDisplay = document.getElementById( 'contentDisplay' );
-var generate = document.getElementById( 'generate' );
-
-var options = presets[ 0 ];
-options.el = el_canvases;
-
-lsys = new Lsys( options );
+var lsys = new Lsys( presets[ 0 ] );
 lsys.generate( options.generations );
-
-generate.click();
-// } );
