@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+ 
+<html>
+    <head>
+        <title>L-systems in HTML5</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/lsys.css" type="text/css" media="all" />
+    </head>
+ 
+    <body>
+        <h1>L-systems in HTML5 (AMD)</h1>
+
+        <nav>
+            <a href='L0.html'>First L-System</a>
+            |
+            Parametric L-System
+            |
+            <a href='tests.html'>qUnit Tests</a>
+        </nav>
+
+        <form id='controls'>
+            <div class='left'>
+                <a name='ctrls'></a>
+                <fieldset><legend id='title'>Loading</legend>
+                <p>
+                    <label class='long' for='variables'>Constants <small><code>#define name value</code> &mdash; one per line</small></label>
+                    <textarea id='variables'></textarea>
+                </p>
+                <p>
+                    <label class='long' for='rules'>
+                        Rules
+                        <small><code>F(x,y): x==1 && y==2 => F+F-f</code> &mdash; one rule per line; <b>F</b>orward, <b>+</b> up, <b>-</b>down, <b>R</b> rest
+                    </small></label>
+                    <textarea id='rules' onChange='preview()'></textarea>
+                </p>
+                <p>
+                    <label for='start' class='long'>Axiom (seed)</label>
+                    <textarea id='start' onChange='preview()'></textarea>
+                </p>
+                <p>
+                    <label for='angle'>Angle</label>
+                    <span class='mooknob knob' id='angle-knob'
+                        aria-valuemin='0'
+                        aria-valuemax='360'
+                        data-monitor='angle'
+                        data-oncomplete='preview()'
+                    ></span>
+                    <input type='text' id='angle' value='' />
+
+                    <label for='wrap_angle_at'>Wrap angle value at</label>
+                    <span class='mooknob knob' id='wrap-angle-knob'
+                        aria-valuemin='0'
+                        aria-valuemax='360'
+                        data-monitor='wrap_angle_at'
+                        data-oncomplete='preview()'
+                    ></span>
+                    <input type='text' id='wrap_angle_at' value='' />
+
+                    <label for='generations'>Generations</label>
+                    <span class='mooknob knob' id='generations-knob'
+                        data-monitor='generations'
+                        aria-valuemin='1'
+                        aria-valuemax='20'
+                        data-scale='0.1'
+                        data-forceint='true'
+                    ></span>
+                    <input type='text' id='generations' value=''/>
+                </p>
+                </fieldset>
+
+                <fieldset><legend>MIDI</legend>
+                <table>
+                    <tr>
+                        <th><label for='duration'>Note duration</label></th>
+                        <th><label for='scale'>Scale</label></th>
+                        <th>Preview</th>
+                    </tr>
+                    <tr style='height:100px'>
+                        <td>
+                            <span class='mooknob knob' id='duration-knob'
+                                style='margin-left:18pt'
+                                data-monitor='duration'
+                                data-scale='0.1'
+                                aria-valuemin='1'
+                                aria-valuemax='60'
+                                data-oncomplete='preview()'
+                            ></span>
+                            <input  type='text' id='duration' value='48' />
+                        </td>
+                        <td>
+                            <select size=4 id='scale' onchange='preview()'>
+                                <option>pentatonic</option>
+                                <option>phrygian</option>
+                                <option>fifths</option>
+                                <option>magyar</option>
+                            </select>
+                        </td>
+                        <td>
+                            <a href='#ctrls' onclick='playSound("/cgi-output/cgi.midi")'>
+                                <span id='preview'></span>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+
+                <fieldset>
+                <legend>
+                    <label for='bracket_callback'>Bracket callback</label>
+                </legend>
+                    <pre style='margin:0; padding:0'>#!/usr/bin/perl
+# $note and $duration are preset decimal integers
+# Alter the above, or set $rv to the value by which to adjust $note.
+my ($self, $variables, $content, $place) = @_;
+# Lsys::MIDI, @$bracketd_vars, @$content, $index_in_content
+my $rv;
+eval {</pre>
+                    <textarea  style='margin:0; padding:0'id='bracket_callback' name='bracket_callback'></textarea>
+<pre style='margin:0; padding:0'>}
+return $rv; </pre>
+                </fieldset>
+            </fieldset>
+        </div>
+
+        <div class='right'>
+                <fieldset><legend>Presets</legend>
+                    <ul id='presets'></ul>
+                </fieldset>
+                <label for='contentDisplay'>Commands output</label>
+                <textarea id='contentDisplay'></textarea>
+
+                <fieldset class='small'><legend>Visual settings</legend>
+                <p>
+                    <label for='canvas_width'>Canvas width</label>
+                    <span class='mooknob knob' id='canvas-width-knob'
+                        data-monitor='canvas_width'
+                        data-scale='0.5'
+                        aria-valuemin='100'
+                        aria-valuemax='2000'
+                    ></span>
+                    <input type='text' id='canvas_width' value=''/>
+                    <label for='canvas_height'>Canvas height</label>
+                    <span class='mooknob knob' id='canvas-height-knob'
+                        data-monitor='canvas_height'
+                        data-scale='0.5'
+                        aria-valuemin='100'
+                        aria-valuemax='2000'
+                    ></span>
+                    <input type='text' id='canvas_height' value=''/>
+
+                    <label for='init_x'>Init X</label>
+                    <input type='text' id='init_x' value=''/>
+                    <label for='init_y'>Init Y</label>
+                    <input type='text' id='init_y' value=''/>
+                </p>
+
+                <p>
+                    <label for='turtle_step_x'>Turtle Step X</label>
+                    <span class='mooknob knob' id='turtle_step_x-knob'
+                        data-monitor='turtle_step_x'
+                        data-scale='0.5'
+                        aria-valuemin='1'
+                        aria-valuemax='50'
+                    ></span>
+                    <input type='text' id='turtle_step_x' value=''/>
+
+                    <label for='turtle_step_y'>Turtle Step Y</label>
+                    <span class='mooknob knob' id='turtle_step_y-knob'
+                        data-monitor='turtle_step_y'
+                        data-scale='0.5'
+                        aria-valuemin='1'
+                        aria-valuemax='50'
+                    ></span>
+                    <input type='text' id='turtle_step_y' value=''/>
+
+                    <label for='line_width'>Line width</label>
+                    <span class='mooknob knob' id='line_width-knob'
+                        data-monitor='line_width'
+                        data-scale='0.5'
+                        aria-valuemin='1'
+                        aria-valuemax='20'
+                    ></span>
+                    <input type='text' id='line_width' value=''/>
+                    <!--
+                    <label for'generations_scale_lines'>Scale lines with age?</label>
+                    <input type='checkbox' checked='true' name='generations_scale_lines' id='generations_scale_lines'/>
+                    -->
+                </p>
+                </fieldset>
+
+                <fieldset class='submit'>
+                    <input type='button' id='generate' value='Generate'/>
+                    <input type='button' id='createMidi' value='Generate MIDI' disabled='true'/>
+                    <p>
+                        <iframe id='iplayer' src='jsplayer.html' height=20></iframe>
+                    <small>(Music on local laptop only)</small>
+                    </p>
+                    <p><pre class='errors' id='error'></pre></p>
+                </fieldset>
+            </div>
+        </form>
+
+        <div id='canvases'></div>
+
+        <script src="bundle.js"></script>
+
+    </body>
+</html>
+
+

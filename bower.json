@@ -1,0 +1,32 @@
+{
+  "name": "Parametric L-system AMD",
+  "version": "1.0.0",
+  "authors": [
+    "Lee Goddard <lee@leegoddard.net>"
+  ],
+  "description": "Parametric L-system with some visualisation",
+  "main": "index.html",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "l-system",
+    "lsystem",
+    "lindenamyer",
+    "canvas",
+    "amd",
+    "api"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "~2.1.15",
+    "log4javascript": "~1.4.9"
+  }
+}
