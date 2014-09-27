@@ -14,7 +14,7 @@ var LOGGER = console; // log4javascript.getLogger();
 var presets = [ {
 		title: 'Tree Balanced',
 		variables: '',
-		rules: 'X -> F[+X][-X]FX\n' +
+		rules: 'X -> C0FF[+X][-X]C1FC2X\n' +
 			'F -> FF\n',
 		start: 'X',
 		angle: 40,
@@ -22,11 +22,12 @@ var presets = [ {
 		init_y: 0,
 		canvas_width: 900,
 		canvas_height: 600,
-		turtle_step_x: 10,
-		turtle_step_y: 10,
-		generations: 3, // 5,
-		line_width: 2,
-		wrap_angle_at: 0
+		turtle_step_x: 5,
+		turtle_step_y: 5,
+		generations: 5,
+		wrap_angle_at: 0,
+		line_width: 0.4,
+		time_scale_lines: 5
 	},
 
 	{ // list all, even unused, keys on this first eleemnt
@@ -202,7 +203,6 @@ var presets = [ {
 ];
 
 var options = presets[ 0 ];
-options.el = document.getElementById( 'canvases' );
-
+options.el = ( document.getElementsByTagName( 'body' )[ 0 ] );
 var lsys = new Lsys( options );
 lsys.generate( options.generations );

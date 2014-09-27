@@ -1,5 +1,5 @@
 {
-	"name": "lsystems",
+	"name": "commonjs-play-lsystems",
 	"version": "1.0.0",
 	"description": "L-system tools",
 	"main": "main.js",
