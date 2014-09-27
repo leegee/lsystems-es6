@@ -206,7 +206,3 @@ options.el = document.getElementById( 'canvases' );
 
 var lsys = new Lsys( options );
 lsys.generate( options.generations );
-
-console.debug(
-	this.content
-);
