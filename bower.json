@@ -1,5 +1,5 @@
 {
-    "name": "commonjs-play-lsystems",
+	"name": "commonjs-play-lsystems",
 	"version": "1.0.0",
 	"authors": [
 		"Lee Goddard <lee@leegoddard.net>"
@@ -25,8 +25,5 @@
 		"test",
 		"tests"
 	],
-	"dependencies": {
-		"requirejs": "~2.1.15",
-		"log4javascript": "~1.4.9"
-	}
+	"dependencies": {}
 }
