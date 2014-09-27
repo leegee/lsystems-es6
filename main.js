@@ -194,151 +194,16 @@ var presets = [ {
 	}
 ];
 
-function preview() {
-	document.getElementById( 'preview' ).innerHTML = '';
-	var options = {};
-	var override = {
-		canvas_width: 200,
-		canvas_height: 100,
-		el: document.getElementById( 'preview' )
-	};
-
-	Object.keys( presets[ 0 ] ).forEach( function ( i ) {
-		options[ i ] = document.getElementById( i ).value; // xx
-	} );
-	for ( var i in override ) {
-		options[ i ] = override[ i ];
-	}
-	var lsys = new Lsys( options );
-	lsys.generate( 1 );
-	createMIDIonServer( lsys, 'preview' );
-}
-
-function loadPreset( idx ) {
-	Object.keys( presets[ idx ] ).forEach( function ( i ) {
-		try {
-			document.getElementById( i ).setAttribute( 'value', presets[ idx ][ i ] );
-		} catch ( e ) {
-			alert( 'Could not set ' + i + '.value' );
-		}
-	} );
-	document.getElementById( 'title' ).textContent = presets[ idx ].title;
-	preview();
-}
-
-function createMIDIonServer( lsys, isPreview ) {
-	console.warn( 'Port me' );
-	return;
-	if ( !lsys || !lsys.hasOwnProperty( 'content' ) ) {
-		alert( 'Graph first, please' );
-		return
-	}
-	try {
-		new Request.JSON( {
-			url: '/cgi-bin/fractal_plant_chords.cgi',
-			onFailure: function ( e ) {
-				alert( 'Not available from your IP' );
-				console.log( e );
-			},
-			onComplete: function () {
-				createMidi.setAttribute( 'value', 'Geneate MIDI' );
-				createMidi.setAttribute( 'disabled', false );
-			},
-			onError: function ( e ) {
-				document.getElementById( 'error' ).textContent = e;
-				console.error( e );
-				// playSound( "/cgi-output/cgi.midi" );
-			},
-			onSuccess: function ( res ) {
-				document.getElementById( 'error' ).textContent = res.errors;
-				if ( !res.errors ) {
-					playSound( "/cgi-output/cgi.midi" );
-				}
-			}
-		} ).post( {
-			content: lsys.content,
-			isPreview: isPreview,
-			duration: document.getElementById( 'duration' ).value,
-			angle: document.getElementById( 'angle' ).value,
-			scale: document.getElementById( 'scale' ).value,
-			wrap_angle_at: document.getElementById( 'wrap_angle_at' ).value,
-			bracket_callback: document.getElementById( 'bracket_callback' ).value
-		} )
-	} catch ( e ) {
-		console.error( e );
-	}
-}
-
-function listPresets() {
-	var docfrag = document.createDocumentFragment();
-	presets.forEach( function ( i, j ) {
-		var li = document.createElement( 'li' );
-		li.textContent = i.title;
-		li.id = 'preset_' + j;
-		li.addEventListener( 'click', function ( e ) {
-			loadPreset( e.target.id.substr( 7 ) );
-		} ); // delegate these
-		docfrag.appendChild( li );
-	} );
-	var ul = document.getElementById( 'presets' );
-	ul.appendChild( docfrag );
-}
-
-// document.addEvent( 'domready', function () {
-
 var lsys = null;
-var midi = document.getElementById( 'midi' );
-var createMidi = document.getElementById( 'createMidi' );
 var el_canvases = document.getElementById( 'canvases' );
 var contentDisplay = document.getElementById( 'contentDisplay' );
 var generate = document.getElementById( 'generate' );
 
-listPresets();
+var options = presets[ 0 ];
+options.el = el_canvases;
 
-generate.addEventListener( 'click', function ( e ) {
-	generate.setAttribute( 'value', 'Generating...' );
-	generate.setAttribute( 'disabled', true );
-	createMidi.setAttribute( 'disabled', true );
+lsys = new Lsys( options );
+lsys.generate( options.generations );
 
-	var options = {};
-	Object.keys( presets[ 0 ] ).forEach( function ( i ) {
-		options[ i ] = document.getElementById( i ).value; // xx
-	} );
-
-	var display_rules = document.getElementById( 'rules' ).value; // xx
-	display_rules = display_rules.replace( /->/g, '→' );
-	var el_t = document.createElement( 'div' );
-	el_t.setAttribute( 'class', 'timing' );
-	el_t.textContent = new Date().getTime();
-	el_canvases.appendChild( el_t );
-
-	// el_canvases.adopt( el_t );
-	options.el = el_canvases;
-
-	lsys = new Lsys( options );
-	lsys.generate( options.generations );
-
-	el_t.textContent = 'Generated in ' +
-		( new Date().getTime() - parseFloat( el_t.textContent ) ) + ' ms. ' +
-		display_rules + ' ' + document.getElementById( 'angle' ).value + 'º/' +
-		document.getElementById( 'wrap_angle_at' ).value // xx
-	;
-
-	contentDisplay.setAttribute( 'value', lsys.content );
-	generate.setAttribute( 'value', 'Generate Graph' );
-	generate.setAttribute( 'disabled', false );
-	createMidi.setAttribute( 'value', 'Generate MIDI' );
-	createMidi.setAttribute( 'disabled', false );
-	return false;
-} );
-
-createMidi.addEventListener( 'click', function () {
-	createMidi.setAttribute( 'value', 'Hang on...' );
-	createMidi.setAttribute( 'disabled', true );
-	createMIDIonServer( lsys );
-	createMidi.setAttribute( 'disabled', false );
-} );
-
-loadPreset( 0 );
 generate.click();
 // } );
