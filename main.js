@@ -24,7 +24,7 @@ var presets = [ {
 		canvas_height: 600,
 		turtle_step_x: 10,
 		turtle_step_y: 10,
-		generations: 5,
+		generations: 3, // 5,
 		line_width: 2,
 		wrap_angle_at: 0
 	},
