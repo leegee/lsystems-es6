@@ -17,14 +17,14 @@ var presets = [ {
 		rules: 'X -> F[+X][-X]FX\n' +
 			'F -> FF\n',
 		start: 'X',
-		angle: 50,
+		angle: 40,
 		init_x: 0,
 		init_y: 0,
-		canvas_width: 1000,
-		canvas_height: 1000,
+		canvas_width: 900,
+		canvas_height: 600,
 		turtle_step_x: 10,
 		turtle_step_y: 10,
-		generations: 2,
+		generations: 5,
 		line_width: 2,
 		wrap_angle_at: 0
 	},
@@ -34,7 +34,7 @@ var presets = [ {
 		variables: "#define $W 0.5\n" +
 			"#define $AS  2\n" +
 			"#define $BS  1\n" +
-			"#define $R       1\n" +
+			"#define $R   1\n" +
 			"#define $L  -1",
 		rules: "F($s,$o) : $s == $AS && $o == $R -> F($AS,$L)F($BS,$R)\n" +
 			"F($s,$o) : $s == $AS && $o == $L -> F($BS,$L)F($AS,$R)\n" +
@@ -201,5 +201,12 @@ var presets = [ {
 	}
 ];
 
-var lsys = new Lsys( presets[ 0 ] );
+var options = presets[ 0 ];
+options.el = document.getElementById( 'canvases' );
+
+var lsys = new Lsys( options );
 lsys.generate( options.generations );
+
+console.debug(
+	this.content
+);
