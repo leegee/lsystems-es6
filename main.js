@@ -1,7 +1,13 @@
 "use strict";
-var Lsys = require( "./lib/LsysParametricAMD.js" );
 
-var LOGGER = console; // log4javascript.getLogger();
+var logger = {};
+logger.trace = logger.log = logger.warn =
+	logger.debug = logger.info = function () {};
+
+var Lsys = require( "./lib/LsysParametric.common.js" );
+
+
+// var LOGGER = console; // log4javascript.getLogger();
 // var LOGGER = log4javascript.getDefaultLogger();
 /*
         var appender = new log4javascript.BrowserConsoleAppender();
@@ -11,7 +17,60 @@ var LOGGER = console; // log4javascript.getLogger();
          LOGGER.addAppender(appender);
         */
 
-var presets = [ {
+var presets = [
+
+	{
+		title: 'Weed',
+		generations: 7,
+		variables: '',
+		start: 'X',
+		rules: 'X -> F[+X]F[-X]+X\nF->FF',
+		angle: 20,
+		init_x: 0,
+		init_y: 0,
+		canvas_width: 1000,
+		canvas_height: 500,
+		turtle_step_x: 2,
+		turtle_step_y: 2,
+		wrap_angle_at: 0,
+		line_width: 1
+	},
+
+	{
+		title: 'Kock Ring Squared',
+		variables: '',
+		rules: 'F -> FF-F-F-F-FF\n',
+		start: 'F-F-F-F',
+		angle: 90,
+		generations: 4,
+		init_x: 1,
+		init_y: 500,
+		canvas_width: 500,
+		canvas_height: 500,
+		turtle_step_x: 5,
+		turtle_step_y: 5,
+		wrap_angle_at: 0,
+		line_width: 1
+	},
+
+	{
+		title: 'Kock Ring',
+		variables: '',
+		rules: 'F -> C0FF-F-F-F-F-FC1+F\n',
+		start: 'F-F-F-F',
+		angle: 90,
+		generations: 4,
+		init_x: 400,
+		init_y: 400,
+		canvas_width: 500,
+		canvas_height: 500,
+		turtle_step_x: 2,
+		turtle_step_y: 2,
+		wrap_angle_at: 0,
+		line_width: 1
+	},
+
+	{
 		title: 'Tree Balanced',
 		variables: '',
 		rules: 'X -> C0FF[+X][-X]C1FC2X\n' +
@@ -212,12 +271,7 @@ body.appendChild( options.canvas );
 var lsys = new Lsys( options );
 lsys.generate( options.generations );
 
-options.generations = 4;
-options.init_y = 100;
-lsys = new Lsys( options );
-lsys.generate( options.generations );
-
-options.generations = 5;
-options.init_y = 100;
-lsys = new Lsys( options );
-lsys.generate( options.generations );
+// options.generations = 4;
+// options.init_y = 100;
+// lsys = new Lsys( options );
+// lsys.generate( options.generations );

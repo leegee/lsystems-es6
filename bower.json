@@ -4,10 +4,10 @@
 	"authors": [
 		"Lee Goddard <lee@leegoddard.net>"
 	],
-	"description": "Parametric L-system with some visualisation",
+	"description": "Parametric L-system with some visualisation.",
 	"main": "index.html",
 	"moduleType": [
-		"amd"
+		"node"
 	],
 	"keywords": [
 		"l-system",
@@ -25,5 +25,10 @@
 		"test",
 		"tests"
 	],
-	"dependencies": {}
+	"dependencies": {
+		"requirejs": "~2.1.15",
+		"es6-module-loader": "~0.9.1",
+		"log4javascript": "~1.4.9"
+	},
+	"homepage": "https://github.com/leegee/commonjs-play-lsystems"
 }

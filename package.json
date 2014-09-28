@@ -4,7 +4,7 @@
 	"description": "L-system tools",
 	"main": "main.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
+		"test": "watchify spec/tests.js -o spec/tests-bundle.js --debug --verbose;",
 		"build": "browserify main.js -o bundle.js",
 		"watch": "watchify main.js -o bundle.js --debug --verbose"
 	},
@@ -19,5 +19,6 @@
 	"license": "ISC",
 	"devDependencies": {
 		"es6ify": "^1.4.0"
-	}
+	},
+	"repository": "git@github.com:leegee/commonjs-play-lsystems.git"
 }
