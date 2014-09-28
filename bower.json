@@ -1,34 +1,35 @@
 {
-	"name": "commonjs-play-lsystems",
-	"version": "1.0.0",
-	"authors": [
-		"Lee Goddard <lee@leegoddard.net>"
-	],
-	"description": "Parametric L-system with some visualisation.",
-	"main": "index.html",
-	"moduleType": [
-		"node"
-	],
-	"keywords": [
-		"l-system",
-		"lsystem",
-		"lindenamyer",
-		"canvas",
-		"amd",
-		"api"
-	],
-	"license": "MIT",
-	"ignore": [
-		"**/.*",
-		"node_modules",
-		"bower_components",
-		"test",
-		"tests"
-	],
-	"dependencies": {
-		"requirejs": "~2.1.15",
-		"es6-module-loader": "~0.9.1",
-		"log4javascript": "~1.4.9"
-	},
-	"homepage": "https://github.com/leegee/commonjs-play-lsystems"
+  "name": "commonjs-play-lsystems",
+  "version": "1.0.0",
+  "authors": [
+    "Lee Goddard <lee@leegoddard.net>"
+  ],
+  "description": "Parametric L-system with some visualisation.",
+  "main": "index.html",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "l-system",
+    "lsystem",
+    "lindenamyer",
+    "canvas",
+    "amd",
+    "api"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "~2.1.15",
+    "es6-module-loader": "~0.9.1",
+    "log4javascript": "~1.4.9",
+    "threejs": "*"
+  },
+  "homepage": "https://github.com/leegee/commonjs-play-lsystems"
 }
