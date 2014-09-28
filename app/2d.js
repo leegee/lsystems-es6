@@ -4,7 +4,7 @@ var logger = {};
 logger.trace = logger.log = logger.warn =
 	logger.debug = logger.info = function () {};
 
-var Lsys = require( "./lib/LsysParametric.common.js" );
+var Lsys = require( "../lib/LsysParametric.common.js" );
 
 
 // var LOGGER = console; // log4javascript.getLogger();
