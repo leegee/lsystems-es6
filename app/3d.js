@@ -1,21 +1,9 @@
 "use strict";
 
-var logger = {};
-logger.trace = logger.log = logger.warn =
-	logger.debug = logger.info = function () {};
-
+// var logger = {};
+// logger.trace = logger.log = logger.warn =
+//  logger.debug = logger.info = function () {};
 var Lsys = require( "../lib/3d.js" );
-
-
-// var LOGGER = console; // log4javascript.getLogger();
-// var LOGGER = log4javascript.getDefaultLogger();
-/*
-    var appender = new log4javascript.BrowserConsoleAppender();
-    // var popUpLayout = new log4javascript.PatternLayout("%d{HH:mm:ss} %-5p - %m%n");
-    // appender.setLayout(popUpLayout);
-     appender.setThreshold(log4javascript.Level.INFO);
-     LOGGER.addAppender(appender);
-    */
 
 var presets = [
 
@@ -28,9 +16,9 @@ var presets = [
 		angle: 20,
 		init_x: 0,
 		init_y: 0,
-		canvas_width: 500,
-		canvas_height: 500,
-		turtle_step_x: 2,
+		canvas_width: 100,
+		canvas_height: 100,
+		turtle_step_x: 1,
 		turtle_step_y: 2,
 		wrap_angle_at: 0,
 		line_width: 1
@@ -251,6 +239,7 @@ var presets = [
 		angle: 90,
 		init_x: 800,
 		init_y: 100,
+		init_z: 0,
 		canvas_width: 1000,
 		canvas_height: 1000,
 		turtle_step_x: 5,
@@ -268,6 +257,7 @@ body.appendChild( options.el );
 
 var lsys = new Lsys( options );
 lsys.generate( options.generations );
+
 
 // options.generations = 4;
 // options.init_y = 100;

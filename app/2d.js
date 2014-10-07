@@ -27,11 +27,11 @@ var presets = [
 		rules: 'X -> F[+X]F[-X]+X\nF->FF',
 		angle: 20,
 		init_x: 0,
-		init_y: 0,
-		canvas_width: 1000,
+		canvas_width: 500,
 		canvas_height: 500,
-		turtle_step_x: 2,
-		turtle_step_y: 2,
+		init_y: 250,
+		turtle_step_x: 1,
+		turtle_step_y: 1,
 		wrap_angle_at: 0,
 		line_width: 1
 	},
@@ -259,7 +259,7 @@ var presets = [
 		line_width: 8,
 		wrap_angle_at: 12
 	}
-];
+ ];
 
 var options = presets[ 0 ];
 var body = ( document.getElementsByTagName( 'body' )[ 0 ] );
