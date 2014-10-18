@@ -1,35 +1,21 @@
 "use strict";
 
-var logger = {};
-logger.trace = logger.log = logger.warn =
-	logger.debug = logger.info = function () {};
-
 var Lsys = require( "../lib/LsysParametric.common.js" );
-
-
-// var LOGGER = console; // log4javascript.getLogger();
-// var LOGGER = log4javascript.getDefaultLogger();
-/*
-        var appender = new log4javascript.BrowserConsoleAppender();
-        // var popUpLayout = new log4javascript.PatternLayout("%d{HH:mm:ss} %-5p - %m%n");
-        // appender.setLayout(popUpLayout);
-         appender.setThreshold(log4javascript.Level.INFO);
-         LOGGER.addAppender(appender);
-        */
 
 var presets = [
 
 	{
 		title: 'Weed',
-		generations: 7,
+		total_generations: 8,
+        max_line_width: 1,
 		variables: '',
 		start: 'X',
-		rules: 'X -> F[+X]F[-X]+X\nF->FF',
+		rules: 'X -> C1F[+X]F[C2-X]+X\nF->FF',
 		angle: 20,
 		init_x: 0,
-		canvas_width: 500,
-		canvas_height: 500,
-		init_y: 250,
+		canvas_width: 1000,
+		canvas_height: 760,
+		init_y: 380,
 		turtle_step_x: 1,
 		turtle_step_y: 1,
 		wrap_angle_at: 0,
@@ -42,7 +28,7 @@ var presets = [
 		rules: 'F -> FF-F-F-F-FF\n',
 		start: 'F-F-F-F',
 		angle: 90,
-		generations: 4,
+		total_generations: 4,
 		init_x: 1,
 		init_y: 500,
 		canvas_width: 500,
@@ -59,7 +45,7 @@ var presets = [
 		rules: 'F -> C0FF-F-F-F-F-FC1+F\n',
 		start: 'F-F-F-F',
 		angle: 90,
-		generations: 4,
+		total_generations: 4,
 		init_x: 400,
 		init_y: 400,
 		canvas_width: 500,
@@ -83,7 +69,7 @@ var presets = [
 		canvas_height: 600,
 		turtle_step_x: 5,
 		turtle_step_y: 5,
-		generations: 5,
+		total_generations: 5,
 		wrap_angle_at: 0,
 		line_width: 0.4,
 		time_scale_lines: 5
@@ -107,7 +93,7 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 4,
 		turtle_step_y: 4,
-		generations: 4,
+		total_generations: 4,
 		line_width: 4
 	},
 
@@ -123,7 +109,7 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 4,
 		turtle_step_y: 4,
-		generations: 5,
+		total_generations: 5,
 		line_width: 1,
 		wrap_angle_at: 12
 	},
@@ -140,7 +126,7 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 8,
 		turtle_step_y: 8,
-		generations: 6,
+		total_generations: 6,
 		line_width: 3,
 		wrap_angle_at: 12
 	}, {
@@ -155,7 +141,7 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 8,
 		turtle_step_y: 8,
-		generations: 6,
+		total_generations: 6,
 		line_width: 3,
 		wrap_angle_at: 12
 	},
@@ -172,7 +158,7 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 10,
 		turtle_step_y: 10,
-		generations: 2,
+		total_generations: 2,
 		line_width: 3,
 		wrap_angle_at: 12
 	},
@@ -189,7 +175,7 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 10,
 		turtle_step_y: 10,
-		generations: 4,
+		total_generations: 4,
 		line_width: 3,
 		wrap_angle_at: 12
 	},
@@ -206,7 +192,7 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 4,
 		turtle_step_y: 4,
-		generations: 4,
+		total_generations: 4,
 		line_width: 6,
 		wrap_angle_at: 12
 	},
@@ -223,7 +209,7 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 4,
 		turtle_step_y: 4,
-		generations: 5,
+		total_generations: 5,
 		wrap_angle_at: 12
 	},
 
@@ -239,7 +225,7 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 4,
 		turtle_step_y: 4,
-		generations: 5,
+		total_generations: 5,
 		wrap_angle_at: 12
 	},
 
@@ -255,7 +241,7 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 5,
 		turtle_step_y: 5,
-		generations: 7,
+		total_generations: 7,
 		line_width: 8,
 		wrap_angle_at: 12
 	}
@@ -269,9 +255,9 @@ options.canvas.height = options.canvas_height;
 body.appendChild( options.canvas );
 
 var lsys = new Lsys( options );
-lsys.generate( options.generations );
+lsys.generate( options.total_generations );
 
-// options.generations = 4;
+// options.total_generations = 4;
 // options.init_y = 100;
 // lsys = new Lsys( options );
-// lsys.generate( options.generations );
+// lsys.generate( options.total_generations );
