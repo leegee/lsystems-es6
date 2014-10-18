@@ -6,16 +6,14 @@ var presets = [
 
 	{
 		title: 'Weed',
-		total_generations: 8,
+		total_generations: 5,
         max_line_width: 1,
 		variables: '',
 		start: 'X',
-		rules: 'X -> C1F[+X]F[C2-X]+X\nF->FF',
-		angle: 20,
-		init_x: 0,
+		rules: 'X -> C1F[C3+X]F[C3-X]+X\nF->C4FF',
+		angle: 40,
 		canvas_width: 1000,
 		canvas_height: 760,
-		init_y: 380,
 		turtle_step_x: 1,
 		turtle_step_y: 1,
 		wrap_angle_at: 0,
@@ -29,8 +27,6 @@ var presets = [
 		start: 'F-F-F-F',
 		angle: 90,
 		total_generations: 4,
-		init_x: 1,
-		init_y: 500,
 		canvas_width: 500,
 		canvas_height: 500,
 		turtle_step_x: 5,
@@ -46,8 +42,8 @@ var presets = [
 		start: 'F-F-F-F',
 		angle: 90,
 		total_generations: 4,
-		init_x: 400,
-		init_y: 400,
+		init_x: 360,
+		init_y: 360,
 		canvas_width: 500,
 		canvas_height: 500,
 		turtle_step_x: 2,
@@ -87,17 +83,17 @@ var presets = [
 			"F($s,$o) : $s == $BS                -> F($AS,$o)\n",
 		start: "!($W)F($BS,$R)",
 		angle: 22,
-		init_x: 0,
-		init_y: 0,
+		init_x: 120,
+		init_y: 120,
 		canvas_width: 1000,
 		canvas_height: 1000,
 		turtle_step_x: 4,
 		turtle_step_y: 4,
-		total_generations: 4,
+		total_generations: 10,
 		line_width: 4
 	},
 
-	{ // list all, even unused, keys on this first eleemnt
+	{
 		title: 'Tree 1',
 		variables: '',
 		rules: 'F->C0FF-[C1-F+F+F]+[C2+F-F-F]',
@@ -247,7 +243,7 @@ var presets = [
 	}
  ];
 
-var options = presets[ 0 ];
+var options = presets[ 9 ];
 var body = ( document.getElementsByTagName( 'body' )[ 0 ] );
 options.canvas = document.createElement( 'canvas' );
 options.canvas.width = options.canvas_width;
