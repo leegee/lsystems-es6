@@ -7,17 +7,23 @@ var presets = [
 	{
 		title: 'Weed',
 		total_generations: 5,
-        max_line_width: 1,
 		variables: '',
 		start: 'X',
+        init_y: 400,
+        init_x: 0,
 		rules: 'X -> C1F[C3+X]F[C3-X]+X\nF->C4FF',
 		angle: 40,
 		canvas_width: 1000,
 		canvas_height: 760,
-		turtle_step_x: 1,
-		turtle_step_y: 1,
+		turtle_step_x: 10,
+		turtle_step_y: 10,
 		wrap_angle_at: 0,
-		line_width: 1
+		line_width: 11,
+        finally: function (){
+            this.ctx.rotate(
+                (180*Math.PI/180)
+            );
+        }
 	},
 
 	{
@@ -243,7 +249,7 @@ var presets = [
 	}
  ];
 
-var options = presets[ 9 ];
+var options = presets[ 0 ];
 var body = ( document.getElementsByTagName( 'body' )[ 0 ] );
 options.canvas = document.createElement( 'canvas' );
 options.canvas.width = options.canvas_width;

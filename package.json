@@ -5,7 +5,8 @@
 	"main": "main.js",
 	"scripts": {
 		"test": "watchify spec/tests.js -o build/tests-bundle-2d.js --debug --verbose;",
-		"build": "browserify app/2d.js -o build/bundle-2d.js && browserify app/3d.js -o build/bundle-3d.js",
+        "build2d": "browserify app/2d.js -o build/bundle-2d.js",
+        "build2d": "browserify app/3d.js browserify app/3d.js -o build/bundle-3d.js",
 		"watch2d": "watchify app/2d.js -o build/bundle-2d.js --debug --verbose",
 		"watch3d": "watchify app/3d.js -o build/bundle-3d.js --debug --verbose"
 	},
