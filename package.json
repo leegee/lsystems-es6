@@ -4,7 +4,7 @@
 	"description": "L-system tools",
 	"main": "main.js",
 	"scripts": {
-		"test": "watchify spec/tests.js -o build/tests-bundle-2d.js --debug --verbose;",
+		"test": "browserify spec/tests.js -o build/tests-bundle-2d.js --debug --verbose; node build/tests-bundle-2d.js",
         "build2d": "browserify app/2d.js -o build/bundle-2d.js",
         "build2d": "browserify app/3d.js browserify app/3d.js -o build/bundle-3d.js",
 		"watch2d": "watchify app/2d.js -o build/bundle-2d.js --debug --verbose",

@@ -19,7 +19,7 @@ var presets = [
 		turtle_step_y: 10,
 		wrap_angle_at: 0,
 		line_width: 11,
-        finally: function (){
+        initially: function (){
             this.ctx.rotate(
                 (180*Math.PI/180)
             );

@@ -37,17 +37,17 @@
 //	 !(0.5)F(2-,1)F(2,-1)F(1,1)F(2,-1)F(1,1)
 //
 
-// var LOGGER = log4javascript.getLogger();
+// var console = log4javascript.getconsole();
 // Logs to the console, not to the default pop-up:
 // var appender = new log4javascript.BrowserConsoleAppender();
 // Log-level raised after development complete:
 // appender.setThreshold(log4javascript.Level.ERROR);
-// LOGGER.addAppender(appender);
+// console.addAppender(appender);
 
 "use strict";
-var Lsys = require( "../lib/LsysParametricAMD.js" );
-alert( Qunit );
-var LOGGER = console; // log4javascript.getLogger();
+var Lsys  = require("../lib/LsysParametric.common.js");
+var Qunit = require("../bower_components/qunit/qunit/qunit.js");
+var console = console; // log4javascript.getconsole();
 
 
 // The content expected for the generation:
@@ -171,7 +171,7 @@ test( 'Generated content', function () {
 			equal( lsys.total_generations, g, 'total_generations ' + g );
 			equal( lsys.content, expectContent[ g ], 'content ' + g );
 		} catch ( e ) {
-			LOGGER.error( e )
+			console.error( e )
 		}
 	}
 } );
