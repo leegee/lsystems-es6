@@ -4,11 +4,12 @@
 	"description": "L-system tools",
 	"main": "main.js",
 	"scripts": {
-		"test": "browserify spec/tests.js -o build/tests-bundle-2d.js --debug --verbose; node build/tests-bundle-2d.js",
+		"test": "browserify spec/tests.js -o build/tests-bundle-2d-gui.js --debug --verbose; node build/tests-bundle-2d.js",
         "build2d": "browserify app/2d.js -o build/bundle-2d.js",
-        "build2d": "browserify app/3d.js browserify app/3d.js -o build/bundle-3d.js",
+        "build3d": "browserify app/3d.js browserify app/3d.js -o build/bundle-3d.js",
 		"watch2d": "watchify app/2d.js -o build/bundle-2d.js --debug --verbose",
-		"watch3d": "watchify app/3d.js -o build/bundle-3d.js --debug --verbose"
+		"watch3d": "watchify app/3d.js -o build/bundle-3d.js --debug --verbose",
+        "watchgui": "watchify app/gui.js -o build/bundle-gui.js --debug --verbose"
 	},
 	"keywords": [
 		"l-system",
