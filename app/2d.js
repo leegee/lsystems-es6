@@ -3,7 +3,6 @@
 var Lsys = require( "../lib/LsysParametric.common.js" );
 
 var presets = [
-
 	{
 		title: 'Weed',
 		total_generations: 5,
@@ -249,17 +248,23 @@ var presets = [
 	}
  ];
 
-var options = presets[ 0 ];
-var body = ( document.getElementsByTagName( 'body' )[ 0 ] );
-options.canvas = document.createElement( 'canvas' );
-options.canvas.width = options.canvas_width;
-options.canvas.height = options.canvas_height;
-body.appendChild( options.canvas );
+var config = presets[ 0 ];
+config.canvas.width  = config.canvas_width;
+config.canvas.height = config.canvas_height;
 
-var lsys = new Lsys( options );
-lsys.generate( options.total_generations );
+config.canvas = document.createElement( 'canvas' );
+document.getElementsByTagName( 'body' )[ 0 ].appendChild( config.canvas );
+
+var lsys = new Lsys( config );
+lsys.generate( config.total_generations );
 
 // options.total_generations = 4;
 // options.init_y = 100;
 // lsys = new Lsys( options );
 // lsys.generate( options.total_generations );
+
+
+
+
+
+
