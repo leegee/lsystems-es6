@@ -1,6 +1,8 @@
 "use strict";
 
-var Lsys = require( "../lib/LsysParametric.common.js" );
+var Lsys = require( "../lib/LsysParametric.common.js" ),
+    GUI  = require( "../lib/GUI.js" );
+
 
 var presets = [
 	{
@@ -248,20 +250,6 @@ var presets = [
 	}
  ];
 
-var lsys = new Lsys( presets[ 0 ] );
-lsys.setCanvas( document.createElement( 'canvas' ) );
+var gui = new GUI( presets[0] );
 
-document.getElementsByTagName( 'body' )[ 0 ].appendChild( lsys.getCanvas() );
-
-lsys.generate( config.total_generations );
-
-// options.total_generations = 4;
-// options.init_y = 100;
-// lsys = new Lsys( options );
-// lsys.generate( options.total_generations );
-
-
-
-
-
-
+gui.run();
