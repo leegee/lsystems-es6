@@ -3,7 +3,6 @@
 var Lsys = require( "../lib/LsysParametric.common.js" ),
     GUI  = require( "../lib/GUI.js" );
 
-
 var presets = [
 	{
 		title: 'Weed',
@@ -250,6 +249,6 @@ var presets = [
 	}
  ];
 
-var gui = new GUI( presets[0] );
+var gui = new GUI( Lsys, presets[0] );
 
 gui.run();
