@@ -1,3 +1,5 @@
+// http://lsys/browsify/eg/gui.html
+
 "use strict";
 
 var Lsys = require( "../lib/LsysParametric.common.js" ),
