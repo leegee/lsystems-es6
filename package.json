@@ -4,6 +4,7 @@
   "description": "L-system tools",
   "main": "main.js",
   "scripts": {
+    "midi": "mocha spec/mocha.js",
     "test": "browserify spec/tests.js -o build/tests-bundle-2d-gui.js --debug --verbose; node build/tests-bundle-2d.js",
     "build2d": "browserify app/2d.js -o build/bundle-2d.js",
     "build3d": "browserify app/3d.js browserify app/3d.js -o build/bundle-3d.js",
@@ -23,7 +24,9 @@
   "license": "ISC",
   "devDependencies": {
     "es6ify": "^1.4.0",
-    "node-dom": "^0.1.0"
+    "node-dom": "^0.1.0",
+    "mocha": "*",
+    "chai": "*"
   },
   "repository": "git@github.com:leegee/commonjs-play-lsystems.git"
 }
