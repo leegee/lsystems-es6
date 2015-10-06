@@ -47,7 +47,7 @@
 "use strict";
 var Lsys     = require("../lib/LsysParametric.common.js"),
     Qunit    = require("../bower_components/qunit/qunit/qunit.js"),
-    console  = console; // log4javascript.getconsole();
+    console  = console, // log4javascript.getconsole();
     dom      = require('node-dom').dom,
     window   = dom(page, null, {} ),
     document = window.document;
