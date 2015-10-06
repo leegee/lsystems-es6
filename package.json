@@ -1,27 +1,29 @@
 {
-	"name": "commonjs-play-lsystems",
-	"version": "1.0.0",
-	"description": "L-system tools",
-	"main": "main.js",
-	"scripts": {
-		"test": "browserify spec/tests.js -o build/tests-bundle-2d-gui.js --debug --verbose; node build/tests-bundle-2d.js",
-        "build2d": "browserify app/2d.js -o build/bundle-2d.js",
-        "build3d": "browserify app/3d.js browserify app/3d.js -o build/bundle-3d.js",
-		"watch2d": "watchify app/2d.js -o build/bundle-2d.js --debug --verbose",
-		"watch3d": "watchify app/3d.js -o build/bundle-3d.js --debug --verbose",
-        "watchgui": "watchify app/gui.js -o build/bundle-gui.js --debug --verbose"
-	},
-	"keywords": [
-		"l-system",
-		"lsystem",
-		"lsys",
-		"lindenmeyer",
-		"system"
-	],
-	"author": "lee goddard",
-	"license": "ISC",
-	"devDependencies": {
-		"es6ify": "^1.4.0"
-	},
-	"repository": "git@github.com:leegee/commonjs-play-lsystems.git"
+  "name": "commonjs-play-lsystems",
+  "version": "1.0.0",
+  "description": "L-system tools",
+  "main": "main.js",
+  "scripts": {
+    "test": "browserify spec/tests.js -o build/tests-bundle-2d-gui.js --debug --verbose; node build/tests-bundle-2d.js",
+    "build2d": "browserify app/2d.js -o build/bundle-2d.js",
+    "build3d": "browserify app/3d.js browserify app/3d.js -o build/bundle-3d.js",
+    "buildgui": "browserify app/gui.js browserify app/gui.js -o build/bundle-gui.js",
+    "watch2d": "watchify app/2d.js -o build/bundle-2d.js --debug --verbose",
+    "watch3d": "watchify app/3d.js -o build/bundle-3d.js --debug --verbose",
+    "watchgui": "watchify app/gui.js -o build/bundle-gui.js --debug --verbose"
+  },
+  "keywords": [
+    "l-system",
+    "lsystem",
+    "lsys",
+    "lindenmeyer",
+    "system"
+  ],
+  "author": "lee goddard",
+  "license": "ISC",
+  "devDependencies": {
+    "es6ify": "^1.4.0",
+    "node-dom": "^0.1.0"
+  },
+  "repository": "git@github.com:leegee/commonjs-play-lsystems.git"
 }

@@ -45,10 +45,12 @@
 // console.addAppender(appender);
 
 "use strict";
-var Lsys  = require("../lib/LsysParametric.common.js");
-var Qunit = require("../bower_components/qunit/qunit/qunit.js");
-var console = console; // log4javascript.getconsole();
-
+var Lsys     = require("../lib/LsysParametric.common.js"),
+    Qunit    = require("../bower_components/qunit/qunit/qunit.js"),
+    console  = console; // log4javascript.getconsole();
+    dom      = require('node-dom').dom,
+    window   = dom(page, null, {} ),
+    document = window.document;
 
 // The content expected for the generation:
 var expectContent = [
@@ -155,7 +157,7 @@ test( 'Variable parsing', function () {
 test( 'Math routines', function () {
 	var lsys = new Lsys( defaultOptions );
 	equal( lsys.dsin( 1 ), 0.01745240643728351, 'sin' );
-	equal( lsys.dcos( 1 ), 0.9998476951563913, 'sin' );
+	equal( lsys.dcos( 1 ), 0.9998476951563913, 'cos' );
 } );
 
 // ## Generate content
