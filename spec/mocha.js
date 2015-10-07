@@ -2,7 +2,19 @@
 var Lsys     = require("../lib/LsysParametric.MIDI"),
     chai     = require('chai'),
     expect   = chai.expect,
-    should   = require('chai').should();
+    should   = require('chai').should(),
+    dom      = require('node-dom').dom,
+    window   = dom('<html><head></head><body></body></html>', null, {
+        features:'',
+        url: {}
+    }),
+    document = window.document;
+
+var Log4js = require('Log4js');
+Log4js.replaceConsole();
+
+console.debug("This is a debugging message from the log4javascript in-page page");
+
 
 // The content expected for the generation:
 var expectContent = [
@@ -15,10 +27,14 @@ var expectContent = [
 
 // These options are fixed for every test:
 var defaultOptions = {
+    // An element into which the Lsys canvas can be inserted:
+    //    el: document.createElement( 'div' ),
     variables: "#define $W    0.5\n" + "#define $AS  2\n" + "#define $BS  1\n" + "#define $R   1\n" + "#define $L    -1",
     rules: "F($s,$o) : $s == $AS && $o == $R -> F($AS,$L)F($BS,$R)\n" + "F($s,$o) : $s == $AS && $o == $L -> F($BS,$L)F($AS,$R)\n" + "F($s,$o) : $s == $BS             -> F($AS,$o)\n",
     // Axiom
-    start: "!($W)F($BS,$R)"
+    start: "!($W)F($BS,$R)",
+    canvas: document.createElement( 'canvas' )
+    //    document.getElementsByTagName( 'body' )[ 0 ].appendChild( this.canvas );
 };
 
 describe("Basic", function() {

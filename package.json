@@ -26,7 +26,13 @@
     "es6ify": "^1.4.0",
     "node-dom": "^0.1.0",
     "mocha": "*",
-    "chai": "*"
+    "jsmidgen": "*",
+    "chai": "*",
+    "htmlparser": "latest",
+    "Log4js": "*"
+  },
+  "dependencies": {
+    "imagemagick": "*"
   },
   "repository": "git@github.com:leegee/commonjs-play-lsystems.git"
 }
