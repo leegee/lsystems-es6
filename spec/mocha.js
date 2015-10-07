@@ -3,6 +3,7 @@ var Lsys     = require("../lib/LsysParametric.MIDI"),
     chai     = require('chai'),
     expect   = chai.expect,
     should   = require('chai').should(),
+    fs       = require('fs'),
     dom      = require('node-dom').dom,
     window   = dom('<html><head></head><body></body></html>', null, {
         features:'',
@@ -37,17 +38,32 @@ var defaultOptions = {
     //    document.getElementsByTagName( 'body' )[ 0 ].appendChild( this.canvas );
 };
 
+var testOutputPath = 'testing.midi';
+
 describe("Basic", function() {
+    // Remove file created by test:
+    before( function () {
+        fs.unlink(testOutputPath, function (){} );
+    });
+
     it('Should import', function(done){
         should.exist(Lsys);
         done();
     });
 
     it( 'Constructed with old args', function () {
-        var oldOptions = defaultOptions;
-        delete oldOptions.variables;
-        var lsys = new Lsys( oldOptions );
+        var options = defaultOptions;
+        delete options.variables;
+        options.outputPath = testOutputPath;
+        var lsys = new Lsys( options );
         should.equal( typeof lsys, "object", "Construted Lsys object" );
+
+        it('created the file at outputPath', function (done) {
+            fs.stat( this.outputPath, function (stats){
+                should.be.true( stats.isFile() );
+                done();
+            });
+        });
     });
 });
 
