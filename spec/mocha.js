@@ -64,6 +64,14 @@ describe("Basic", function() {
                 done();
             });
         });
+
+        lsys.options.rules.should.be.instanceof(Array);
+        lsys.options.rules.forEach( function ( i ) {
+            i.should.be.instanceof(Array);
+            i.length.should.be.equal(3);
+        } );
+
+
     });
 });
 
