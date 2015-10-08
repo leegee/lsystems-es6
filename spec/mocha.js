@@ -16,8 +16,7 @@ Log4js.replaceConsole();
 
 console.debug("This is a debugging message from the log4javascript in-page page");
 
-
-// The content expected for the generation:
+// The content expected from the generator, by generation:
 var expectContent = [
     '!(0.5)F(1,1)',
     '!(0.5)F(2,1)',
@@ -39,6 +38,30 @@ var defaultOptions = {
 };
 
 var testOutputPath = 'testing.midi';
+
+// test( 'Constructor with bad rules', function () {
+//     var badOptions = Object.clone( defaultOptions );
+//     badOptions.rules = 'This is not a rule.';
+//     try {
+//         var lsys = new Lsys( badOptions );
+//     } catch ( e ) {
+//         ok( e.match( /parse error/gi ), 'Bad rule parse error thrown' );
+//     }
+// } );
+
+// test( 'Bad variables option', function () {
+//     var badOptions = Object.clone( defaultOptions );
+//     badOptions.variables = 'This is not a variable definition.';
+//     try {
+//         var lsys = new Lsys( badOptions );
+//     } catch ( e ) {
+//         console.log( e );
+//         ok(
+//             e.match( /variable def/gi ),
+//             'Bad variable parse error thrown as hoped'
+//         );
+//     }
+// } );
 
 describe("Basic", function() {
     // Remove file created by test:
@@ -112,44 +135,18 @@ describe( 'Variable parsing', function () {
     lsys.variables.$Test.should.equal(-0.5);
 } );
 
-// test( 'Constructor with bad rules', function () {
-//     var badOptions = Object.clone( defaultOptions );
-//     badOptions.rules = 'This is not a rule.';
-//     try {
-//         var lsys = new Lsys( badOptions );
-//     } catch ( e ) {
-//         ok( e.match( /parse error/gi ), 'Bad rule parse error thrown' );
-//     }
-// } );
-
-// test( 'Bad variables option', function () {
-//     var badOptions = Object.clone( defaultOptions );
-//     badOptions.variables = 'This is not a variable definition.';
-//     try {
-//         var lsys = new Lsys( badOptions );
-//     } catch ( e ) {
-//         console.log( e );
-//         ok(
-//             e.match( /variable def/gi ),
-//             'Bad variable parse error thrown as hoped'
-//         );
-//     }
-// } );
-
-// // ## Generate content
-
-// test( 'Generated content', function () {
-//     // Test each generation
-//     for ( var g = 1; g < expectContent.length; g++ ) {
-//         // Let not an error stop the next test
-//         try {
-//             var lsys = new Lsys( defaultOptions );
-//             lsys.generate( g );
-//             equal( lsys.generation, g, 'lsys.generation ' + g );
-//             equal( lsys.total_generations, g, 'total_generations ' + g );
-//             equal( lsys.content, expectContent[ g ], 'content ' + g );
-//         } catch ( e ) {
-//             console.error( e )
-//         }
-//     }
-// } );
+describe( 'Generated content', function () {
+    // Test each generation
+    for ( var g = 1; g < expectContent.length; g++ ) {
+        // Let not an error stop the next test
+        try {
+            var lsys = new Lsys( defaultOptions );
+            lsys.generate( g );
+            lsys.generation.should.equal(g);
+            lsys.total_generations.should.equal(g);
+            lsys.content.should.equal( expectContent[ g ] );
+        } catch ( e ) {
+            console.error( e )
+        }
+    }
+} );
