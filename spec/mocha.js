@@ -14,8 +14,10 @@ var expectContent = [
     '!(0.5)F(2,1)',
     '!(0.5)F(2,-1)F(1,1)',
     '!(0.5)F(1,-1)F(2,1)F(2,1)',
-    '!(0.5)F(2,-1)F(2,-1)F(1,1)F(2,-1)F(1,1)'
+//    '!(0.5)F(2,-1)F(2,-1)F(1,1)F(2,-1)F(1,1)'
+     '!(0.5)F(1,-1)F(2,1)F(1,-1)F(2,1)F(2,1)F(1,-1)F(2,1)F(2,1)'
 ];
+
 
 // These options are fixed for every test:
 var defaultOptions = {
@@ -126,7 +128,7 @@ describe("Basic", function() {
                 var lsys = new Lsys( defaultOptions );
                 lsys.generate( g+1 );
                 lsys.generation.should.equal( lsys.totalGenerations );
-                // lsys.content.should.equal( expectContent[ g ] );
+                lsys.content.should.equal( expectContent[ g ] );
             } catch ( e ) {
                 console.error( e )
             }
