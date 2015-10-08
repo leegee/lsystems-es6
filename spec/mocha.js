@@ -87,53 +87,50 @@ describe("Basic", function() {
             [ "F($s,$o)", "$s == $BS", "F($AS,$o)" ]
         ]);
     });
-});
 
-
-describe( 'Interploation', function () {
-    it('Interpolates variable', function (){
+    it('should interpolates a variable', function (){
         var varName = '$AS';
         var lsys = new Lsys( defaultOptions );
         should.equal( parseFloat(lsys.interploateVars( varName )), 2);
     });
+
+    it( 'should string to re and arg name', function () {
+        var rv = new Lsys( defaultOptions )
+            .string2reAndArgNames( 'F(s,o)' );
+        typeof( rv ).should.be.instanceof(Array);
+        rv.length.should.equal(2);
+        typeof( rv[ 0 ] ).should.be.instanceof(RegExp);
+        var varWord = '([\\$\\w-]+)';
+        rv[ 0 ].toString().should.equal(
+            '/(F)\\(' + varWord + ',' + varWord + '\\)/g'
+        );
+        typeof( rv[1] ).should.be.instanceof(Array);
+        rv[1].should.be.deep.equal([ 's', 'o' ] );
+    } );
+
+    it('should parse variable strings and populate as expected', function (){
+        var varOpts = defaultOptions;
+        varOpts.variables += "\n#define $Test -0.5";
+        var lsys = new Lsys( varOpts );
+        lsys.variables.$AS.should.equal( 2);
+        lsys.variables.$L.should.equal(-1);
+        lsys.variables.$W.should.equal(0.5);
+        lsys.variables.$Test.should.equal(-0.5);
+    });
+
+    it('should generate content as expected', function (){
+        // Test each generation
+        for ( var g = 0; g < expectContent.length; g++ ) {
+            // Let not an error stop the next test
+            try {
+                var lsys = new Lsys( defaultOptions );
+                lsys.generate( g+1 );
+                lsys.generation.should.equal(g);
+                // lsys.total_generations.should.equal(g);
+                // lsys.content.should.equal( expectContent[ g ] );
+            } catch ( e ) {
+                console.error( e )
+            }
+        }
+    });
 } );
-
-// describe( 'string to re and arg name', function () {
-//     var rv = new Lsys( defaultOptions )
-//         .string2reAndArgNames( 'F(s,o)' );
-//     typeof( rv ).should.be.instanceof(Array);
-//     rv.length.should.equal(2);
-//     typeof( rv[ 0 ] ).should.be.instanceof(RegExp);
-//     var varWord = '([\\$\\w-]+)';
-//     rv[ 0 ].toString().should.equal(
-//         '/(F)\\(' + varWord + ',' + varWord + '\\)/g'
-//     );
-//     typeof( rv[1] ).should.be.instanceof(Array);
-//     rv[1].should.be.deep.equal([ 's', 'o' ] );
-// } );
-
-// describe( 'Variable parsing', function () {
-//     var varOpts = defaultOptions;
-//     varOpts.variables += "\n#define $Test -0.5";
-//     var lsys = new Lsys( varOpts );
-//     lsys.variables.$AS.should.equal( 2);
-//     lsys.variables.$L.should.equal(-1);
-//     lsys.variables.$W.should.equal(0.5);
-//     lsys.variables.$Test.should.equal(-0.5);
-// } );
-
-// describe( 'Generated content', function () {
-//     // Test each generation
-//     for ( var g = 1; g < expectContent.length; g++ ) {
-//         // Let not an error stop the next test
-//         try {
-//             var lsys = new Lsys( defaultOptions );
-//             lsys.generate( g );
-//             lsys.generation.should.equal(g);
-//             lsys.total_generations.should.equal(g);
-//             lsys.content.should.equal( expectContent[ g ] );
-//         } catch ( e ) {
-//             console.error( e )
-//         }
-//     }
-// } );
