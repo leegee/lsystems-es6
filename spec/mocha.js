@@ -125,8 +125,7 @@ describe("Basic", function() {
             try {
                 var lsys = new Lsys( defaultOptions );
                 lsys.generate( g+1 );
-                lsys.generation.should.equal(g);
-                // lsys.total_generations.should.equal(g);
+                lsys.generation.should.equal( lsys.totalGenerations );
                 // lsys.content.should.equal( expectContent[ g ] );
             } catch ( e ) {
                 console.error( e )
