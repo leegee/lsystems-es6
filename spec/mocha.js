@@ -85,7 +85,7 @@ describe('Harness', function (){
     });
 
 
-    describe('Non-parametric', function () {
+    describe('Non-parametric non-progressive', function () {
         var defaultOptions = {
             variables: "",
             rules: "A -> AB\n" + "B->A",
@@ -117,6 +117,34 @@ describe('Harness', function (){
         });
     });
 
+    describe('Non-parametric progressive', function () {
+        var defaultOptions = {
+            variables: "",
+            rules: "A -> A+B-\n" + "B->A+",
+            // Axiom
+            start: "A"
+        };
+
+        // The content expected from the generator, by generation:
+        var expectContent = [
+            'A+B-'
+        ];
+
+        it('should generate content as expected', function (){
+            // Test each generation
+            for ( var g = 0; g < expectContent.length; g++ ) {
+                // Let not an error stop the next test
+                try {
+                    var lsys = new Lsys( defaultOptions );
+                    lsys.generate( g+1 );
+                    lsys.generation.should.equal( lsys.totalGenerations );
+                    lsys.content.should.equal( expectContent[ g ] );
+                } catch ( e ) {
+                    console.error( e )
+                }
+            }
+        });
+    });
 
     // describe('Parametric', function () {
     //     var defaultOptions = {
