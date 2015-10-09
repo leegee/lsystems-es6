@@ -118,39 +118,40 @@ describe('Harness', function (){
     });
 
 
-    describe('Parametric', function () {
-        var defaultOptions = {
-            variables: "#define $W    0.5\n" + "#define $AS  2\n" + "#define $BS  1\n" + "#define $R   1\n" + "#define $L    -1",
-            rules: "F($s,$o) : $s == $AS && $o == $R -> F($AS,$L)F($BS,$R)\n" + "F($s,$o) : $s == $AS && $o == $L -> F($BS,$L)F($AS,$R)\n" + "F($s,$o) : $s == $BS             -> F($AS,$o)\n",
-            // Axiom
-            start: "!($W)F($BS,$R)"
-        };
+    // describe('Parametric', function () {
+    //     var defaultOptions = {
+    //         variables: "#define $W    0.5\n" + "#define $AS  2\n" + "#define $BS  1\n" + "#define $R   1\n" + "#define $L    -1",
+    //         rules: "F($s,$o) : $s == $AS && $o == $R -> F($AS,$L)F($BS,$R)\n" + "F($s,$o) : $s == $AS && $o == $L -> F($BS,$L)F($AS,$R)\n" + "F($s,$o) : $s == $BS             -> F($AS,$o)\n",
+    //         // Axiom
+    //         start: "!($W)F($BS,$R)"
+    //     };
 
-        // The content expected from the generator, by generation:
-        var expectContent = [
-            '!(0.5)F(1,1)',
-            '!(0.5)F(2,1)',
-            '!(0.5)F(2,-1)F(1,1)',
-            '!(0.5)F(1,-1)F(2,1)F(2,1)',
-        //    '!(0.5)F(2,-1)F(2,-1)F(1,1)F(2,-1)F(1,1)'
-             '!(0.5)F(1,-1)F(2,1)F(1,-1)F(2,1)F(2,1)F(1,-1)F(2,1)F(2,1)'
-        ];
+    //     // The content expected from the generator, by generation:
+    //     var expectContent = [
+    //         '!(0.5)F(1,1)',
+    //         '!(0.5)F(2,1)',
+    //         '!(0.5)F(2,-1)F(1,1)',
+    //         '!(0.5)F(1,-1)F(2,1)F(2,1)',
+    //     //    '!(0.5)F(2,-1)F(2,-1)F(1,1)F(2,-1)F(1,1)'
+    //          '!(0.5)F(1,-1)F(2,1)F(1,-1)F(2,1)F(2,1)F(1,-1)F(2,1)F(2,1)'
+    //     ];
 
-        it('should generate content as expected', function (){
-            // Test each generation
-            for ( var g = 0; g < expectContent.length; g++ ) {
-                // Let not an error stop the next test
-                try {
-                    var lsys = new Lsys( defaultOptions );
-                    lsys.generate( g+1 );
-                    lsys.generation.should.equal( lsys.totalGenerations );
-                    lsys.content.should.equal( expectContent[ g ] );
-                } catch ( e ) {
-                    console.error( e )
-                }
-            }
-        });
-    } );
+    //     it('should generate content as expected', function (){
+    //         // Test each generation
+    //         for ( var g = 0; g < expectContent.length; g++ ) {
+    //             // Let not an error stop the next test
+    //             try {
+    //                 var lsys = new Lsys( defaultOptions );
+    //                 lsys.generate( g+1 );
+    //                 lsys.generation.should.equal( lsys.totalGenerations );
+    //                 lsys.content.should.equal( expectContent[ g ] );
+    //             } catch ( e ) {
+    //                 console.error( e )
+    //             }
+    //         }
+    //     });
+    // });
+
 });
 
         // test( 'Constructor with bad rules', function () {
