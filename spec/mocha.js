@@ -126,22 +126,25 @@ describe('Harness', function (){
         };
 
         // The content expected from the generator, by generation:
-        var expectContent = [
-            'A+B-'
+        var expect = [
+            {
+                stave: [ 'e3', 'd3', 'c3', 'd#3' ],
+                content: 'A+B-'
+            },
+            {
+                stave: [ 'e3', 'd3', 'c3', 'd#3', 'c#3', 'e3', 'd3', 'c3' ],
+                content: 'A+B-+A+-'
+            }
         ];
 
         it('should generate content as expected', function (){
             // Test each generation
-            for ( var g = 0; g < expectContent.length; g++ ) {
-                // Let not an error stop the next test
-                try {
-                    var lsys = new Lsys( defaultOptions );
-                    lsys.generate( g+1 );
-                    lsys.generation.should.equal( lsys.totalGenerations );
-                    lsys.content.should.equal( expectContent[ g ] );
-                } catch ( e ) {
-                    console.error( e )
-                }
+            for ( var g = 0; g < expect.length; g++ ) {
+                var lsys = new Lsys( defaultOptions );
+                lsys.generate( g+1 );
+                lsys.generation.should.equal( lsys.totalGenerations );
+                lsys.content.should.equal( expect[ g ].content );
+                lsys.stave.should.deep.equal( expect[ g ].stave );
             }
         });
     });
