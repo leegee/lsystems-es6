@@ -3,16 +3,17 @@ var Lsys     = require("../lib/LsysParametric.MIDI"),
     chai     = require('chai'),
     expect   = chai.expect,
     should   = require('chai').should(),
-    fs       = require('fs');
+    fs       = require('fs'),
+    clone    = require('clone');
 
 var Log4js = require('Log4js');
 Log4js.replaceConsole();
 
-describe('Harness', function (){
+describe('LsysMIDI', function (){
     var testOutputPath = 'testing.midi';
     // Remove file created by test:
     before( function () {
-        fs.unlink(testOutputPath, function (){} );
+        fs.unlink(testOutputPath, function (){});
     });
 
     describe('Generic', function () {
@@ -34,7 +35,7 @@ describe('Harness', function (){
         });
 
         it('should parse variable strings and populate as expected', function (){
-            var varOpts = defaultOptions;
+            var varOpts = clone(defaultOptions);
             varOpts.variables += "\n#define $Test -0.5";
             var lsys = new Lsys( varOpts );
             lsys.variables.$AS.should.equal( 2);
@@ -43,8 +44,30 @@ describe('Harness', function (){
             lsys.variables.$Test.should.equal(-0.5);
         });
 
+        it('fails to construct', function (){
+            describe( 'throws bad rule parse error', function () {
+                var lsys;
+                var badOptions = clone(defaultOptions);
+                badOptions.rules = 'X X X';
+                expect( function () {
+                    lsys = new Lsys( badOptions );
+                }).to.throw(Lsys.ParseError);
+            });
+
+            test( 'throws bad variable parse error', function () {
+                var lsys; // yes, optimistic
+                var badOptions = clone(defaultOptions);
+                badOptions.variables = 'This is not a variable definition.';
+                expect( function (){
+                    lsys = new Lsys( badOptions );
+                }).to.throw(new TypeError)
+                    .and.to.throw(/variable def/gi);
+            });
+        });
+
+
         it( 'Constructs', function () {
-            var options = defaultOptions;
+            var options = clone(defaultOptions);
             options.outputPath = testOutputPath;
             var lsys = new Lsys( options );
             should.equal( typeof lsys, "object", "Construted Lsys object" );
@@ -60,7 +83,7 @@ describe('Harness', function (){
             lsys.options.rules.forEach( function ( i ) {
                 i.should.be.instanceof(Array);
                 i.length.should.be.equal(3);
-            } );
+            });
 
             lsys.options.rules.should.deep.equal( [
                 [ "F($s,$o)", "$s == $AS && $o == $R", "F($AS,$L)F($BS,$R)" ],
@@ -81,7 +104,7 @@ describe('Harness', function (){
             );
             typeof( rv[1] ).should.be.instanceof(Array);
             rv[1].should.be.deep.equal([ 's', 'o' ] );
-        } );
+        });
     });
 
 
@@ -159,12 +182,11 @@ describe('Harness', function (){
 
         // The content expected from the generator, by generation:
         var expectContent = [
-            '!(0.5)F(1,1)',
             '!(0.5)F(2,1)',
+            // '!(0.5)F(2,-1)',
             '!(0.5)F(2,-1)F(1,1)',
             '!(0.5)F(1,-1)F(2,1)F(2,1)',
-        //    '!(0.5)F(2,-1)F(2,-1)F(1,1)F(2,-1)F(1,1)'
-             '!(0.5)F(1,-1)F(2,1)F(1,-1)F(2,1)F(2,1)F(1,-1)F(2,1)F(2,1)'
+            '!(0.5)F(2,-1)F(2,-1)F(1,1)F(2,-1)F(1,1)'
         ];
 
         it('should generate content as expected', function (){
@@ -184,27 +206,3 @@ describe('Harness', function (){
     });
 
 });
-
-        // test( 'Constructor with bad rules', function () {
-        //     var badOptions = Object.clone( defaultOptions );
-        //     badOptions.rules = 'This is not a rule.';
-        //     try {
-        //         var lsys = new Lsys( badOptions );
-        //     } catch ( e ) {
-        //         ok( e.match( /parse error/gi ), 'Bad rule parse error thrown' );
-        //     }
-        // } );
-
-        // test( 'Bad variables option', function () {
-        //     var badOptions = Object.clone( defaultOptions );
-        //     badOptions.variables = 'This is not a variable definition.';
-        //     try {
-        //         var lsys = new Lsys( badOptions );
-        //     } catch ( e ) {
-        //         console.log( e );
-        //         ok(
-        //             e.match( /variable def/gi ),
-        //             'Bad variable parse error thrown as hoped'
-        //         );
-        //     }
-        // } );

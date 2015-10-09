@@ -23,13 +23,14 @@
   "author": "lee goddard",
   "license": "ISC",
   "devDependencies": {
-    "es6ify": "^1.4.0",
-    "node-dom": "^0.1.0",
-    "mocha": "*",
-    "jsmidgen": "*",
+    "Log4js": "*",
     "chai": "*",
+    "clone": "^1.0.2",
+    "es6ify": "^1.4.0",
     "htmlparser": "latest",
-    "Log4js": "*"
+    "jsmidgen": "*",
+    "mocha": "*",
+    "node-dom": "^0.1.0"
   },
   "dependencies": {
     "imagemagick": "*"
