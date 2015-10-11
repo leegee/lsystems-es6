@@ -7,3 +7,7 @@ main.old.js
 build/
 *.sublime-project
 *.sublime-workspace
+freetype-2.4.10/
+libpng-1.6.10.tar.gz
+lsys.midi
+temp/
