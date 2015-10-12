@@ -1,6 +1,6 @@
 "use strict";
 
-var Lsys = require( "../lib/LsysParametric.common.js" );
+var Lsys = require( "../lib/LsysParametric.2d.js" );
 
 var presets = [
 	{

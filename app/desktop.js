@@ -2,12 +2,14 @@
 
 "use strict";
 
-var gui = require('nw.gui');
-var win = gui.Window.get();
-win.on('document-start', function() {
-    var Lsys = require( "../lib/LsysParametric.MIDI.js" ),
-        GUI  = require( "../lib/GUI.js" );
+// window.addEventListener('load', yourFunction, false);
+// // ..... or
 
+var gui = require('nw.gui');
+var Lsys = require( "../lib/LsysParametric.2d.js" ),
+    GUI  = require( "../lib/GUI.js" );
+
+function main () {
     var presets = [
     	{
     		title: 'Weed',
@@ -25,9 +27,11 @@ win.on('document-start', function() {
     		wrap_angle_at: 0,
     		line_width: 11,
             initially: function (){
-                this.ctx.rotate(
-                    (180*Math.PI/180)
-                );
+                if (this.ctx){
+                    this.ctx.rotate(
+                        (180*Math.PI/180)
+                    );
+                }
             }
     	},
 
@@ -256,10 +260,11 @@ win.on('document-start', function() {
 
     var gui = new GUI();
 
-    console.log(document.title);
-    console.log(typeof document);
-
     gui.addLsys( Lsys, presets[0] );
 
-    // gui.run();
-});
+    gui.run();
+};
+
+// window.addEventListener('DOMContentLoaded', main, false);
+// window.addEventListener('load', main, false);
+main()
