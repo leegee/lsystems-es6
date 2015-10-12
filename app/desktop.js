@@ -264,6 +264,7 @@ function main () {
     config.totalGenerations = 4;
     gui.addLsys( Lsys, config );
 
+    gui.addLsys( Lsys, config );
     gui.run();
 };
 

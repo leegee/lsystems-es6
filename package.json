@@ -12,7 +12,7 @@
   },
 
   "scripts": {
-    "testmidi": "mocha --check-leaks --full-trace --ui tdd spec/mocha.js",
+    "miditest": "mocha --check-leaks --full-trace --ui tdd spec/midi.mocha.js",
     "test": "browserify spec/tests.js -o build/tests-bundle-2d-gui.js --debug --verbose; node build/tests-bundle-2d.js",
     "build2d": "browserify app/2d.js -o build/bundle-2d.js",
     "build3d": "browserify app/3d.js -o build/bundle-3d.js",
