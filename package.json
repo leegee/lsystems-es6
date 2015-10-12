@@ -5,9 +5,10 @@
 
   "main": "app/desktop.html",
   "window": {
-    "toolbar": false,
+    "toolbar": true,
     "width": 800,
-    "height": 500
+    "height": 500,
+    "position": "center"
   },
 
   "scripts": {

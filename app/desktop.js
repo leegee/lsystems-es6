@@ -260,7 +260,9 @@ function main () {
 
     var gui = new GUI();
 
-    gui.addLsys( Lsys, presets[0] );
+    var config = presets[0];
+    config.totalGenerations = 4;
+    gui.addLsys( Lsys, config );
 
     gui.run();
 };
