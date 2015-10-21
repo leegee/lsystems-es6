@@ -1,13 +1,23 @@
 "use strict";
 var Lsys     = require("../lib/LsysParametric.MIDI"),
+    GUI      = require("../lib/GUI"),
     chai     = require('chai'),
     expect   = chai.expect,
     should   = require('chai').should(),
     fs       = require('fs'),
-    clone    = require('clone');
+    clone    = require('clone'),
+    Log4js   = require('Log4js');
 
-var Log4js = require('Log4js');
 Log4js.replaceConsole();
+var logger = Log4js.getLogger();
+logger.setLevel('FATAL');
+
+var defaultOptions = {
+    variables: "#define $W    0.5\n" + "#define $AS  2\n" + "#define $BS  1\n" + "#define $R   1\n" + "#define $L    -1",
+    rules: "F($s,$o) : $s == $AS && $o == $R -> F($AS,$L)F($BS,$R)\n" + "F($s,$o) : $s == $AS && $o == $L -> F($BS,$L)F($AS,$R)\n" + "F($s,$o) : $s == $BS             -> F($AS,$o)\n",
+    // Axiom
+    start: "!($W)F($BS,$R)"
+};
 
 describe('LsysMIDI', function (){
     var testOutputPath = 'testing.midi';
@@ -17,13 +27,6 @@ describe('LsysMIDI', function (){
     });
 
     describe('Generic', function () {
-        var defaultOptions = {
-            variables: "#define $W    0.5\n" + "#define $AS  2\n" + "#define $BS  1\n" + "#define $R   1\n" + "#define $L    -1",
-            rules: "F($s,$o) : $s == $AS && $o == $R -> F($AS,$L)F($BS,$R)\n" + "F($s,$o) : $s == $AS && $o == $L -> F($BS,$L)F($AS,$R)\n" + "F($s,$o) : $s == $BS             -> F($AS,$o)\n",
-            // Axiom
-            start: "!($W)F($BS,$R)"
-        };
-
         it('Should import', function(){
             should.exist(Lsys);
         });
@@ -70,7 +73,8 @@ describe('LsysMIDI', function (){
             var options = clone(defaultOptions);
             options.outputPath = testOutputPath;
             var lsys = new Lsys( options );
-            should.equal( typeof lsys, "object", "Construted Lsys object" );
+            should.equal( typeof lsys, "object", "Construted object" );
+            lsys.should.be.instanceof(Lsys, "Construted Lsys object" );
 
             it('created the file at outputPath', function (done) {
                 fs.stat( this.outputPath, function (stats){
@@ -172,7 +176,7 @@ describe('LsysMIDI', function (){
         });
     });
 
-    describe('Parametric', function () {
+    describe('Parametric', function (done) {
         var defaultOptions = {
             variables: "#define $W    0.5\n" + "#define $AS  2\n" + "#define $BS  1\n" + "#define $R   1\n" + "#define $L    -1",
             rules: "F($s,$o) : $s == $AS && $o == $R -> F($AS,$L)F($BS,$R)\n" + "F($s,$o) : $s == $AS && $o == $L -> F($BS,$L)F($AS,$R)\n" + "F($s,$o) : $s == $BS             -> F($AS,$o)\n",
@@ -205,4 +209,15 @@ describe('LsysMIDI', function (){
         });
     });
 
+    describe('GUI', function (){
+        it('should init have two Lsys', function (){
+            var options = clone(defaultOptions);
+            var gui = new GUI( options );
+            it( 'Constructs', function () {
+                should.equal( typeof lsys, "object", "Construted GUI object" );
+                should.equal( gui instanceof GUI, "object", "Construted GUI object" );
+            });
+        });
+    });
 });
+
