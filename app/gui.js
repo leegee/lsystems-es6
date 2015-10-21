@@ -253,5 +253,4 @@ var presets = [
 
 var gui = new GUI();
 gui.addLsys( Lsys, presets[0] );
-
 gui.run();
