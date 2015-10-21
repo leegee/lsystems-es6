@@ -13,6 +13,6 @@ describe('GUI', function (){
     console.log('----', gui);
 
     it('Should instantiate', function (){
-        gui.should.exist();
+        should.exist(gui);
     });
 });
