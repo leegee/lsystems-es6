@@ -57,14 +57,13 @@ describe('LsysMIDI', function (){
                 }).to.throw(Lsys.ParseError);
             });
 
-            test( 'throws bad variable parse error', function () {
+            describe( 'throws bad variable parse error', function () {
                 var lsys; // yes, optimistic
                 var badOptions = clone(defaultOptions);
                 badOptions.variables = 'This is not a variable definition.';
                 expect( function (){
                     lsys = new Lsys( badOptions );
-                }).to.throw(new TypeError)
-                    .and.to.throw(/variable def/gi);
+                }).to.throw(/variable def/gi);
             });
         });
 

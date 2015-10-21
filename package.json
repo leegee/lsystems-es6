@@ -10,7 +10,7 @@
     "position": "center"
   },
   "scripts": {
-    "miditest": "mocha --check-leaks --full-trace --ui tdd spec/midi.mocha.js",
+    "miditest": "grunt mochaTest",
     "test": "browserify spec/tests.js -o build/tests-bundle-2d-gui.js --debug --verbose; node build/tests-bundle-2d.js",
     "build2d": "browserify app/2d.js -o build/bundle-2d.js",
     "build3d": "browserify app/3d.js -o build/bundle-3d.js",
@@ -34,8 +34,10 @@
     "clone": "^1.0.2",
     "es6ify": "^1.4.0",
     "grunt": "^0.4.5",
+    "grunt-browserify": "^4.0.1",
     "grunt-contrib-connect": "^0.11.2",
     "grunt-contrib-jshint": "^0.11.3",
+    "grunt-mocha-test": "^0.12.7",
     "htmlparser": "latest",
     "jsmidgen": "*",
     "mocha": "*",
