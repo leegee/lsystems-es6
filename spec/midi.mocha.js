@@ -22,7 +22,7 @@ var defaultOptions = {
     start: "!($W)F($BS,$R)"
 };
 
-var testOutputPath = path.normalize('./testing.midi');
+var testOutputPath = path.resolve('./testing.midi');
 
 function testOptions () {
     var args = arguments,
@@ -49,11 +49,6 @@ describe('testOptions', function (){
 });
 
 describe('LsysMIDI', function (){
-    // Remove file created by test:
-    before( function () {
-        fs.unlink(testOutputPath, function (){});
-    });
-
     describe('Generic', function () {
         it('Should import', function(){
             should.exist(Lsys);
@@ -112,9 +107,10 @@ describe('LsysMIDI', function (){
             should.exist(lsys.options.outputPath);
             lsys.options.outputPath.should.eql( testOutputPath );
 
-            lsys.generate();
-
             it('created the file at outputPath', function () {
+                fs.unlink(testOutputPath, function (){});
+                lsys.generate();
+                expect( lsys.file.toBytes().length ).to.be.a('number');
                 fs.statSync( lsys.options.outputPath ).isFile().should.be.true();
             });
 
