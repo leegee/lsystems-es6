@@ -252,5 +252,7 @@ var presets = [
  ];
 
 var gui = new GUI();
-gui.addLsys( Lsys, presets[0] );
+var args = presets[0];
+args.window = window;
+gui.addLsys( window.document, Lsys, args );
 gui.run();
