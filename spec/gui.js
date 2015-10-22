@@ -60,7 +60,7 @@ describe('GUI', function (){
         should.exist(gui);
     });
 
-    gui.addLsys( global.document, Lsys, { canvas: mockCanvas });
+    gui.addLsys( Lsys, { canvas: mockCanvas });
 
     it('Should have now controls', function (){
         should.exist( gui.controls );
