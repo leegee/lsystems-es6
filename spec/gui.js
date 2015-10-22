@@ -3,7 +3,6 @@ var GUI      = require("../lib/GUI"),
     Controls = require('../lib/Controls'),
     Lsys     = require("../lib/LsysParametric.2d.js"),
     should   = require("chai").should(),
-    expect   = require("chai").expect,
     Log4js   = require('Log4js'),
     jsdom    = require('jsdom');
 

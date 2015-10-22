@@ -5,8 +5,11 @@ var Lsys     = require("../lib/LsysParametric.MIDI"),
     expect   = chai.expect,
     should   = require('chai').should(),
     fs       = require('fs'),
-    clone    = require('clone'),
-    Log4js   = require('Log4js');
+    path     = require('path'),
+    Log4js   = require('Log4js'),
+    jsdom    = require('jsdom');
+
+var window = typeof window === 'undefined'? jsdom.jsdom().defaultView : window;
 
 Log4js.replaceConsole();
 var logger = Log4js.getLogger();
@@ -19,8 +22,33 @@ var defaultOptions = {
     start: "!($W)F($BS,$R)"
 };
 
+var testOutputPath = path.normalize('./testing.midi');
+
+function testOptions () {
+    var args = arguments,
+        rv = {
+            window: window
+        };
+
+    for (var i=0; i < args.length; i++){
+        Object.keys( args[i] ).forEach( function (key) {
+            rv[key] = args[i][key];
+        });
+    }
+    return rv;
+}
+
+describe('testOptions', function (){
+    var opts = testOptions(
+        defaultOptions, {
+        outputPath: testOutputPath
+    });
+    should.equal( typeof opts, "object", "created object" );
+    should.exist(opts.outputPath);
+    should.equal( defaultOptions.start, "!($W)F($BS,$R)", "got defaultOptions" );
+});
+
 describe('LsysMIDI', function (){
-    var testOutputPath = 'testing.midi';
     // Remove file created by test:
     before( function () {
         fs.unlink(testOutputPath, function (){});
@@ -33,14 +61,14 @@ describe('LsysMIDI', function (){
 
         it('should interpolates a variable', function (){
             var varName = '$AS';
-            var lsys = new Lsys( defaultOptions );
+            var lsys = new Lsys( testOptions(defaultOptions) );
             should.equal( parseFloat(lsys.interploateVars( varName )), 2);
         });
 
         it('should parse variable strings and populate as expected', function (){
-            var varOpts = clone(defaultOptions);
-            varOpts.variables += "\n#define $Test -0.5";
-            var lsys = new Lsys( varOpts );
+            var lsys = new Lsys(testOptions( defaultOptions, {
+                variables: defaultOptions.variables += "\n#define $Test -0.5",
+            }));
             lsys.variables.$AS.should.equal( 2);
             lsys.variables.$L.should.equal(-1);
             lsys.variables.$W.should.equal(0.5);
@@ -50,49 +78,59 @@ describe('LsysMIDI', function (){
         it('fails to construct', function (){
             describe( 'throws bad rule parse error', function () {
                 var lsys;
-                var badOptions = clone(defaultOptions);
-                badOptions.rules = 'X X X';
                 expect( function () {
-                    lsys = new Lsys( badOptions );
+                    lsys = new Lsys( testOptions(
+                        defaultOptions,
+                        {rules: 'X X X'})
+                    );
                 }).to.throw(Lsys.ParseError);
             });
 
             describe( 'throws bad variable parse error', function () {
                 var lsys; // yes, optimistic
-                var badOptions = clone(defaultOptions);
-                badOptions.variables = 'This is not a variable definition.';
                 expect( function (){
-                    lsys = new Lsys( badOptions );
+                    lsys = new Lsys( testOptions(
+                        defaultOptions,
+                        {
+                            variables: 'This is not a variable definition.'
+                        }
+                    ));
                 }).to.throw(/variable def/gi);
             });
         });
 
 
-        it( 'Constructs', function () {
-            var options = clone(defaultOptions);
-            options.outputPath = testOutputPath;
-            var lsys = new Lsys( options );
-            should.equal( typeof lsys, "object", "Construted object" );
-            lsys.should.be.instanceof(Lsys, "Construted Lsys object" );
+        describe( 'Construction', function () {
+            var lsys = new Lsys( testOptions(
+                defaultOptions,
+                {
+                    outputPath: testOutputPath
+                }
+            ));
+            should.equal( typeof lsys, "object", "created object" );
+            lsys.should.be.instanceof(Lsys, "created Lsys object" );
+            should.exist(lsys.options.outputPath);
+            lsys.options.outputPath.should.eql( testOutputPath );
 
-            it('created the file at outputPath', function (done) {
-                fs.stat( this.outputPath, function (stats){
-                    should.be.true( stats.isFile() );
-                    done();
+            lsys.generate();
+
+            it('created the file at outputPath', function () {
+                fs.statSync( lsys.options.outputPath ).isFile().should.be.true();
+            });
+
+            it("with rules", function (){
+                lsys.options.rules.should.be.instanceof(Array);
+                lsys.options.rules.forEach( function ( i ) {
+                    i.should.be.instanceof(Array);
+                    i.length.should.be.equal(3);
                 });
-            });
 
-            lsys.options.rules.should.be.instanceof(Array);
-            lsys.options.rules.forEach( function ( i ) {
-                i.should.be.instanceof(Array);
-                i.length.should.be.equal(3);
+                lsys.options.rules.should.deep.equal( [
+                    [ "F($s,$o)", "$s == $AS && $o == $R", "F($AS,$L)F($BS,$R)" ],
+                    [ "F($s,$o)", "$s == $AS && $o == $L", "F($BS,$L)F($AS,$R)" ],
+                    [ "F($s,$o)", "$s == $BS", "F($AS,$o)" ]
+                ]);
             });
-
-            lsys.options.rules.should.deep.equal( [
-                [ "F($s,$o)", "$s == $AS && $o == $R", "F($AS,$L)F($BS,$R)" ],
-                [ "F($s,$o)", "$s == $AS && $o == $L", "F($BS,$L)F($AS,$R)" ],
-                [ "F($s,$o)", "$s == $BS", "F($AS,$o)" ]
-            ]);
         });
 
         it( 'should string to re and arg name', function () {
@@ -210,8 +248,7 @@ describe('LsysMIDI', function (){
 
     describe('GUI', function (){
         it('should init have two Lsys', function (){
-            var options = clone(defaultOptions);
-            var gui = new GUI( options );
+            var gui = new GUI( defaultOptions );
             it( 'Constructs', function () {
                 should.equal( typeof lsys, "object", "Construted GUI object" );
                 should.equal( gui instanceof GUI, "object", "Construted GUI object" );
