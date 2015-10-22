@@ -56,11 +56,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-browserify');
+  // grunt.loadNpmTasks('grunt-mocha-phantomjs');
   // grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('default', ['jshint']);
 
-  grunt.registerTask('see', ['mochaTest', 'browserify', 'connect']);
+  grunt.registerTask('see', ['jshint', 'mochaTest', 'browserify', 'connect']);
+
+
 
   /** Move from package.json
   "scripts": {
