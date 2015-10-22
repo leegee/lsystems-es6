@@ -110,8 +110,8 @@ describe('LsysMIDI', function (){
             it('created the file at outputPath', function () {
                 fs.unlink(testOutputPath, function (){});
                 lsys.generate();
-                expect( lsys.file.toBytes().length ).to.be.a('number');
-                fs.statSync( lsys.options.outputPath ).isFile().should.be.true();
+                lsys.file.toBytes().length.should.be.a('number');
+                fs.statSync( testOutputPath ).isFile().should.be.true;
             });
 
             it("with rules", function (){
