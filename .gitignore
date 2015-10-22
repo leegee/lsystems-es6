@@ -2,7 +2,6 @@ testing.midi
 node_modules
 bower_components
 bundle.js
-index.oldgui.html
 lib/3d.Mootootls.js
 main.old.js
 build/
