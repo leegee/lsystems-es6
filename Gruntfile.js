@@ -30,7 +30,7 @@ module.exports = function(grunt) {
         options: {
           reporter: 'spec'
         },
-        src: ['spec/midi.mocha.js']
+        src: ['spec/*.js']
       }
     },
 
