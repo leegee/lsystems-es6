@@ -263,11 +263,9 @@ args.totalGenerations = 2;
 args.window = window;
 gui.addLsys( Lsys, args );
 
-console.log(presets[0]);
-
-args = presets[0];
+args = presets[5];
 args.window = window;
-args.totalGenerations = 2;
+args.totalGenerations = 1;
 gui.addLsys( Lsys, args );
 
 gui.run();
