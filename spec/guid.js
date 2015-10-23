@@ -1,4 +1,8 @@
 "use strict";
+if (typeof define !== 'function') {
+    var define = require('amdefine')(module)
+}
+
 var GUID   = require("../lib/GUID");
 var should = require('chai').should();
 
