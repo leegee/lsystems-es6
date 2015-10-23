@@ -13,7 +13,7 @@ logger.setLevel('DEBUG');
 var document,
     window = jsdom.jsdom().defaultView;
 
-window.onModulesLoaded = function () {
+window.onModulesLoaded = function (next) {
     jsdom.env(
         '<html><head/><body></body></html>',
         function (err, win){
