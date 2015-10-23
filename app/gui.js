@@ -1,10 +1,25 @@
 // http://lsys/browsify/eg/gui.html
-
 "use strict";
 
-var Lsys = require( "../lib/LsysParametric.2d.js" ),
-    GUI  = require( "../lib/GUI.js" ),
-    Log4js   = require('Log4js');
+requirejs.config({
+    //By default load any module IDs from js/lib
+    // baseUrl: '.',
+    paths: {
+        Log4js: '../bower_components/log4javascript/log4javascript'
+    }
+});
+
+require([
+    "../lib/LsysParametric.2d.js",
+    "../lib/GUI.js",
+    "Log4js"
+], function (
+    Lsys, GUI, Log4js
+){
+
+// var Lsys = require( "../lib/LsysParametric.2d.js" ),
+//     GUI  = require( "../lib/GUI.js" ),
+//     Log4js   = require('Log4js');
 
 // Log4js.replaceConsole();
 // var logger = Log4js.getLogger();
@@ -27,9 +42,11 @@ var presets = [
 		wrap_angle_at: 0,
 		line_width: 11,
         initially: function (){
-            this.ctx.rotate(
-                (180*Math.PI/180)
-            );
+            if (this.ctx){
+                this.ctx.rotate(
+                    (180*Math.PI/180)
+                );
+            }
         }
 	},
 
@@ -270,3 +287,4 @@ gui.addLsys( Lsys, args );
 
 gui.run();
 
+});
