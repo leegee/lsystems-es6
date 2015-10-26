@@ -12,12 +12,12 @@ var presets = [
         init_x: 0,
 		rules: 'X -> C1F[C3+X]F[C3-X]+X\nF->C4FF',
 		angle: 40,
-		canvas_width: 1000,
-		canvas_height: 760,
-		turtle_step_x: 10,
-		turtle_step_y: 10,
+		canvasWidth: 1000,
+		canvasHeight: 760,
+		turtleStepX: 10,
+		turtleStepY: 10,
 		wrapAngleAt: 0,
-		line_width: 11,
+		lineWidthPixels: 11,
         initially: function (){
             this.ctx.rotate(
                 (180*Math.PI/180)
@@ -32,12 +32,12 @@ var presets = [
 		start: 'F-F-F-F',
 		angle: 90,
 		generations: 4,
-		canvas_width: 500,
-		canvas_height: 500,
-		turtle_step_x: 5,
-		turtle_step_y: 5,
+		canvasWidth: 500,
+		canvasHeight: 500,
+		turtleStepX: 5,
+		turtleStepY: 5,
 		wrapAngleAt: 0,
-		line_width: 1
+		lineWidthPixels: 1
 	},
 
 	{
@@ -49,12 +49,12 @@ var presets = [
 		generations: 4,
 		init_x: 360,
 		init_y: 360,
-		canvas_width: 500,
-		canvas_height: 500,
-		turtle_step_x: 2,
-		turtle_step_y: 2,
+		canvasWidth: 500,
+		canvasHeight: 500,
+		turtleStepX: 2,
+		turtleStepY: 2,
 		wrapAngleAt: 0,
-		line_width: 1
+		lineWidthPixels: 1
 	},
 
 	{
@@ -66,13 +66,13 @@ var presets = [
 		angle: 40,
 		init_x: 0,
 		init_y: 0,
-		canvas_width: 900,
-		canvas_height: 600,
-		turtle_step_x: 5,
-		turtle_step_y: 5,
+		canvasWidth: 900,
+		canvasHeight: 600,
+		turtleStepX: 5,
+		turtleStepY: 5,
 		generations: 5,
 		wrapAngleAt: 0,
-		line_width: 0.4,
+		lineWidthPixels: 0.4,
 		time_scale_lines: 5
 	},
 
@@ -90,12 +90,12 @@ var presets = [
 		angle: 22,
 		init_x: 120,
 		init_y: 120,
-		canvas_width: 1000,
-		canvas_height: 1000,
-		turtle_step_x: 4,
-		turtle_step_y: 4,
+		canvasWidth: 1000,
+		canvasHeight: 1000,
+		turtleStepX: 4,
+		turtleStepY: 4,
 		generations: 10,
-		line_width: 4
+		lineWidthPixels: 4
 	},
 
 	{
@@ -106,12 +106,12 @@ var presets = [
 		angle: 22,
 		init_x: 0,
 		init_y: 0,
-		canvas_width: 1000,
-		canvas_height: 1000,
-		turtle_step_x: 4,
-		turtle_step_y: 4,
+		canvasWidth: 1000,
+		canvasHeight: 1000,
+		turtleStepX: 4,
+		turtleStepY: 4,
 		generations: 5,
-		line_width: 1,
+		lineWidthPixels: 1,
 		wrapAngleAt: 12
 	},
 
@@ -123,12 +123,12 @@ var presets = [
 		angle: 27,
 		init_x: 0,
 		init_y: 0,
-		canvas_width: 1000,
-		canvas_height: 1000,
-		turtle_step_x: 8,
-		turtle_step_y: 8,
+		canvasWidth: 1000,
+		canvasHeight: 1000,
+		turtleStepX: 8,
+		turtleStepY: 8,
 		generations: 6,
-		line_width: 3,
+		lineWidthPixels: 3,
 		wrapAngleAt: 12
 	}, {
 		title: 'Tree x',
@@ -138,12 +138,12 @@ var presets = [
 		angle: 27,
 		init_x: 0,
 		init_y: 0,
-		canvas_width: 1000,
-		canvas_height: 1000,
-		turtle_step_x: 8,
-		turtle_step_y: 8,
+		canvasWidth: 1000,
+		canvasHeight: 1000,
+		turtleStepX: 8,
+		turtleStepY: 8,
 		generations: 6,
-		line_width: 3,
+		lineWidthPixels: 3,
 		wrapAngleAt: 12
 	},
 
@@ -155,12 +155,12 @@ var presets = [
 		angle: 45,
 		init_x: 0,
 		init_y: 0,
-		canvas_width: 1000,
-		canvas_height: 1000,
-		turtle_step_x: 10,
-		turtle_step_y: 10,
+		canvasWidth: 1000,
+		canvasHeight: 1000,
+		turtleStepX: 10,
+		turtleStepY: 10,
 		generations: 2,
-		line_width: 3,
+		lineWidthPixels: 3,
 		wrapAngleAt: 12
 	},
 
@@ -172,12 +172,12 @@ var presets = [
 		angle: 45,
 		init_x: 0,
 		init_y: 0,
-		canvas_width: 1000,
-		canvas_height: 1000,
-		turtle_step_x: 10,
-		turtle_step_y: 10,
+		canvasWidth: 1000,
+		canvasHeight: 1000,
+		turtleStepX: 10,
+		turtleStepY: 10,
 		generations: 4,
-		line_width: 3,
+		lineWidthPixels: 3,
 		wrapAngleAt: 12
 	},
 
@@ -189,12 +189,12 @@ var presets = [
 		angle: 60,
 		init_x: 0,
 		init_y: 0,
-		canvas_width: 1000,
-		canvas_height: 1000,
-		turtle_step_x: 4,
-		turtle_step_y: 4,
+		canvasWidth: 1000,
+		canvasHeight: 1000,
+		turtleStepX: 4,
+		turtleStepY: 4,
 		generations: 4,
-		line_width: 6,
+		lineWidthPixels: 6,
 		wrapAngleAt: 12
 	},
 
@@ -206,10 +206,10 @@ var presets = [
 		angle: 22,
 		init_x: 0,
 		init_y: 0,
-		canvas_width: 1000,
-		canvas_height: 1000,
-		turtle_step_x: 4,
-		turtle_step_y: 4,
+		canvasWidth: 1000,
+		canvasHeight: 1000,
+		turtleStepX: 4,
+		turtleStepY: 4,
 		generations: 5,
 		wrapAngleAt: 12
 	},
@@ -222,10 +222,10 @@ var presets = [
 		angle: 22,
 		init_x: 0,
 		init_y: 0,
-		canvas_width: 1000,
-		canvas_height: 1000,
-		turtle_step_x: 4,
-		turtle_step_y: 4,
+		canvasWidth: 1000,
+		canvasHeight: 1000,
+		turtleStepX: 4,
+		turtleStepY: 4,
 		generations: 5,
 		wrapAngleAt: 12
 	},
@@ -238,19 +238,19 @@ var presets = [
 		angle: 90,
 		init_x: 800,
 		init_y: 100,
-		canvas_width: 1000,
-		canvas_height: 1000,
-		turtle_step_x: 5,
-		turtle_step_y: 5,
+		canvasWidth: 1000,
+		canvasHeight: 1000,
+		turtleStepX: 5,
+		turtleStepY: 5,
 		generations: 7,
-		line_width: 8,
+		lineWidthPixels: 8,
 		wrapAngleAt: 12
 	}
  ];
 
 var config = presets[ 0 ];
-config.canvas.width  = config.canvas_width;
-config.canvas.height = config.canvas_height;
+config.canvas.width  = config.canvasWidth;
+config.canvas.height = config.canvasHeight;
 
 config.canvas = document.createElement( 'canvas' );
 document.getElementsByTagName( 'body' )[ 0 ].appendChild( config.canvas );
