@@ -56,18 +56,24 @@ describe('GUI', function (){
         window: window
     });
 
-    it('Should instantiate', function (){
+    it('should instantiate', function (){
         should.exist(gui);
     });
 
     gui.addLsys( Lsys, { canvas: mockCanvas });
 
-    it('Should have now controls', function (){
+    it('should have controls', function (){
         should.exist( gui.controls );
         gui.controls.should.be.instanceof( Array );
         gui.controls.should.be.length( 1 );
         gui.controls[0].should.be.instanceof( Controls );
         gui.controls[0].getElement().nodeName.should.eql('DIV');
+
+        describe('Controls', function (){
+            it('should have values', function (){
+                window.document.getElementsByClassName('rules').length.should.be.gt(0);
+            });
+        });
     });
 
 });

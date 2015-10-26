@@ -24,7 +24,7 @@ function main () {
     		canvas_height: 760,
     		turtle_step_x: 10,
     		turtle_step_y: 10,
-    		wrap_angle_at: 0,
+    		wrapAngleAt: 0,
     		line_width: 11,
             initially: function (){
                 if (this.ctx){
@@ -46,7 +46,7 @@ function main () {
     		canvas_height: 500,
     		turtle_step_x: 5,
     		turtle_step_y: 5,
-    		wrap_angle_at: 0,
+    		wrapAngleAt: 0,
     		line_width: 1
     	},
 
@@ -63,7 +63,7 @@ function main () {
     		canvas_height: 500,
     		turtle_step_x: 2,
     		turtle_step_y: 2,
-    		wrap_angle_at: 0,
+    		wrapAngleAt: 0,
     		line_width: 1
     	},
 
@@ -81,7 +81,7 @@ function main () {
     		turtle_step_x: 5,
     		turtle_step_y: 5,
     		total_generations: 5,
-    		wrap_angle_at: 0,
+    		wrapAngleAt: 0,
     		line_width: 0.4,
     		time_scale_lines: 5
     	},
@@ -122,7 +122,7 @@ function main () {
     		turtle_step_y: 4,
     		total_generations: 5,
     		line_width: 1,
-    		wrap_angle_at: 12
+    		wrapAngleAt: 12
     	},
 
     	{
@@ -139,7 +139,7 @@ function main () {
     		turtle_step_y: 8,
     		total_generations: 6,
     		line_width: 3,
-    		wrap_angle_at: 12
+    		wrapAngleAt: 12
     	}, {
     		title: 'Tree x',
     		variables: '',
@@ -154,7 +154,7 @@ function main () {
     		turtle_step_y: 8,
     		total_generations: 6,
     		line_width: 3,
-    		wrap_angle_at: 12
+    		wrapAngleAt: 12
     	},
 
     	{
@@ -171,7 +171,7 @@ function main () {
     		turtle_step_y: 10,
     		total_generations: 2,
     		line_width: 3,
-    		wrap_angle_at: 12
+    		wrapAngleAt: 12
     	},
 
     	{
@@ -188,7 +188,7 @@ function main () {
     		turtle_step_y: 10,
     		total_generations: 4,
     		line_width: 3,
-    		wrap_angle_at: 12
+    		wrapAngleAt: 12
     	},
 
     	{
@@ -205,7 +205,7 @@ function main () {
     		turtle_step_y: 4,
     		total_generations: 4,
     		line_width: 6,
-    		wrap_angle_at: 12
+    		wrapAngleAt: 12
     	},
 
     	{
@@ -221,7 +221,7 @@ function main () {
     		turtle_step_x: 4,
     		turtle_step_y: 4,
     		total_generations: 5,
-    		wrap_angle_at: 12
+    		wrapAngleAt: 12
     	},
 
     	{
@@ -237,7 +237,7 @@ function main () {
     		turtle_step_x: 4,
     		turtle_step_y: 4,
     		total_generations: 5,
-    		wrap_angle_at: 12
+    		wrapAngleAt: 12
     	},
 
     	{
@@ -254,14 +254,14 @@ function main () {
     		turtle_step_y: 5,
     		total_generations: 7,
     		line_width: 8,
-    		wrap_angle_at: 12
+    		wrapAngleAt: 12
     	}
      ];
 
     var gui = new GUI();
 
     var config = presets[0];
-    config.totalGenerations = 4;
+    config.generations = 4;
     gui.addLsys( Lsys, config );
 
     gui.addLsys( Lsys, config );

@@ -5,7 +5,7 @@ var Lsys = require( "../lib/LsysParametric.2d.js" );
 var presets = [
 	{
 		title: 'Weed',
-		total_generations: 5,
+		generations: 5,
 		variables: '',
 		start: 'X',
         init_y: 400,
@@ -16,7 +16,7 @@ var presets = [
 		canvas_height: 760,
 		turtle_step_x: 10,
 		turtle_step_y: 10,
-		wrap_angle_at: 0,
+		wrapAngleAt: 0,
 		line_width: 11,
         initially: function (){
             this.ctx.rotate(
@@ -31,12 +31,12 @@ var presets = [
 		rules: 'F -> FF-F-F-F-FF\n',
 		start: 'F-F-F-F',
 		angle: 90,
-		total_generations: 4,
+		generations: 4,
 		canvas_width: 500,
 		canvas_height: 500,
 		turtle_step_x: 5,
 		turtle_step_y: 5,
-		wrap_angle_at: 0,
+		wrapAngleAt: 0,
 		line_width: 1
 	},
 
@@ -46,14 +46,14 @@ var presets = [
 		rules: 'F -> C0FF-F-F-F-F-FC1+F\n',
 		start: 'F-F-F-F',
 		angle: 90,
-		total_generations: 4,
+		generations: 4,
 		init_x: 360,
 		init_y: 360,
 		canvas_width: 500,
 		canvas_height: 500,
 		turtle_step_x: 2,
 		turtle_step_y: 2,
-		wrap_angle_at: 0,
+		wrapAngleAt: 0,
 		line_width: 1
 	},
 
@@ -70,8 +70,8 @@ var presets = [
 		canvas_height: 600,
 		turtle_step_x: 5,
 		turtle_step_y: 5,
-		total_generations: 5,
-		wrap_angle_at: 0,
+		generations: 5,
+		wrapAngleAt: 0,
 		line_width: 0.4,
 		time_scale_lines: 5
 	},
@@ -94,7 +94,7 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 4,
 		turtle_step_y: 4,
-		total_generations: 10,
+		generations: 10,
 		line_width: 4
 	},
 
@@ -110,9 +110,9 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 4,
 		turtle_step_y: 4,
-		total_generations: 5,
+		generations: 5,
 		line_width: 1,
-		wrap_angle_at: 12
+		wrapAngleAt: 12
 	},
 
 	{
@@ -127,9 +127,9 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 8,
 		turtle_step_y: 8,
-		total_generations: 6,
+		generations: 6,
 		line_width: 3,
-		wrap_angle_at: 12
+		wrapAngleAt: 12
 	}, {
 		title: 'Tree x',
 		variables: '',
@@ -142,9 +142,9 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 8,
 		turtle_step_y: 8,
-		total_generations: 6,
+		generations: 6,
 		line_width: 3,
-		wrap_angle_at: 12
+		wrapAngleAt: 12
 	},
 
 	{
@@ -159,9 +159,9 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 10,
 		turtle_step_y: 10,
-		total_generations: 2,
+		generations: 2,
 		line_width: 3,
-		wrap_angle_at: 12
+		wrapAngleAt: 12
 	},
 
 	{
@@ -176,9 +176,9 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 10,
 		turtle_step_y: 10,
-		total_generations: 4,
+		generations: 4,
 		line_width: 3,
-		wrap_angle_at: 12
+		wrapAngleAt: 12
 	},
 
 	{
@@ -193,9 +193,9 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 4,
 		turtle_step_y: 4,
-		total_generations: 4,
+		generations: 4,
 		line_width: 6,
-		wrap_angle_at: 12
+		wrapAngleAt: 12
 	},
 
 	{
@@ -210,8 +210,8 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 4,
 		turtle_step_y: 4,
-		total_generations: 5,
-		wrap_angle_at: 12
+		generations: 5,
+		wrapAngleAt: 12
 	},
 
 	{
@@ -226,8 +226,8 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 4,
 		turtle_step_y: 4,
-		total_generations: 5,
-		wrap_angle_at: 12
+		generations: 5,
+		wrapAngleAt: 12
 	},
 
 	{
@@ -242,9 +242,9 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 5,
 		turtle_step_y: 5,
-		total_generations: 7,
+		generations: 7,
 		line_width: 8,
-		wrap_angle_at: 12
+		wrapAngleAt: 12
 	}
  ];
 
@@ -256,12 +256,12 @@ config.canvas = document.createElement( 'canvas' );
 document.getElementsByTagName( 'body' )[ 0 ].appendChild( config.canvas );
 
 var lsys = new Lsys( config );
-lsys.generate( config.total_generations );
+lsys.generate( config.generations );
 
-// options.total_generations = 4;
+// options.generations = 4;
 // options.init_y = 100;
 // lsys = new Lsys( options );
-// lsys.generate( options.total_generations );
+// lsys.generate( options.generations );
 
 
 

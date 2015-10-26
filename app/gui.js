@@ -28,7 +28,7 @@ require([
 var presets = [
 	{
 		title: 'Weed',
-		totalGenerations: 5,
+		generations: 5,
 		variables: '',
 		start: 'X',
         init_y: 400,
@@ -39,7 +39,7 @@ var presets = [
 		canvas_height: 760,
 		turtle_step_x: 10,
 		turtle_step_y: 10,
-		wrap_angle_at: 0,
+		wrapAngleAt: 0,
 		line_width: 11,
         initially: function (){
             if (this.ctx){
@@ -56,12 +56,12 @@ var presets = [
 		rules: 'F -> FF-F-F-F-FF\n',
 		start: 'F-F-F-F',
 		angle: 90,
-		totalGenerations: 4,
+		generations: 4,
 		canvas_width: 500,
 		canvas_height: 500,
 		turtle_step_x: 5,
 		turtle_step_y: 5,
-		wrap_angle_at: 0,
+		wrapAngleAt: 0,
 		line_width: 1
 	},
 
@@ -71,14 +71,14 @@ var presets = [
 		rules: 'F -> C0FF-F-F-F-F-FC1+F\n',
 		start: 'F-F-F-F',
 		angle: 90,
-		totalGenerations: 4,
+		generations: 4,
 		init_x: 360,
 		init_y: 360,
 		canvas_width: 500,
 		canvas_height: 500,
 		turtle_step_x: 2,
 		turtle_step_y: 2,
-		wrap_angle_at: 0,
+		wrapAngleAt: 0,
 		line_width: 1
 	},
 
@@ -95,8 +95,8 @@ var presets = [
 		canvas_height: 600,
 		turtle_step_x: 5,
 		turtle_step_y: 5,
-		totalGenerations: 5,
-		wrap_angle_at: 0,
+		generations: 5,
+		wrapAngleAt: 0,
 		line_width: 0.4,
 		time_scale_lines: 5
 	},
@@ -119,7 +119,7 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 4,
 		turtle_step_y: 4,
-		totalGenerations: 10,
+		generations: 10,
 		line_width: 4
 	},
 
@@ -135,9 +135,9 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 4,
 		turtle_step_y: 4,
-		totalGenerations: 5,
+		generations: 5,
 		line_width: 1,
-		wrap_angle_at: 12
+		wrapAngleAt: 12
 	},
 
 	{
@@ -152,9 +152,9 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 8,
 		turtle_step_y: 8,
-		totalGenerations: 6,
+		generations: 6,
 		line_width: 3,
-		wrap_angle_at: 12
+		wrapAngleAt: 12
 	}, {
 		title: 'Tree x',
 		variables: '',
@@ -167,9 +167,9 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 8,
 		turtle_step_y: 8,
-		totalGenerations: 6,
+		generations: 6,
 		line_width: 3,
-		wrap_angle_at: 12
+		wrapAngleAt: 12
 	},
 
 	{
@@ -184,9 +184,9 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 10,
 		turtle_step_y: 10,
-		totalGenerations: 2,
+		generations: 2,
 		line_width: 3,
-		wrap_angle_at: 12
+		wrapAngleAt: 12
 	},
 
 	{
@@ -201,9 +201,9 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 10,
 		turtle_step_y: 10,
-		totalGenerations: 4,
+		generations: 4,
 		line_width: 3,
-		wrap_angle_at: 12
+		wrapAngleAt: 12
 	},
 
 	{
@@ -218,9 +218,9 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 4,
 		turtle_step_y: 4,
-		totalGenerations: 4,
+		generations: 4,
 		line_width: 6,
-		wrap_angle_at: 12
+		wrapAngleAt: 12
 	},
 
 	{
@@ -235,8 +235,8 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 4,
 		turtle_step_y: 4,
-		totalGenerations: 5,
-		wrap_angle_at: 12
+		generations: 5,
+		wrapAngleAt: 12
 	},
 
 	{
@@ -251,8 +251,8 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 4,
 		turtle_step_y: 4,
-		totalGenerations: 5,
-		wrap_angle_at: 12
+		generations: 5,
+		wrapAngleAt: 12
 	},
 
 	{
@@ -267,22 +267,22 @@ var presets = [
 		canvas_height: 1000,
 		turtle_step_x: 5,
 		turtle_step_y: 5,
-		totalGenerations: 7,
+		generations: 7,
 		line_width: 8,
-		wrap_angle_at: 12
+		wrapAngleAt: 12
 	}
  ];
 
 
 var gui = new GUI();
 var args = presets[0];
-args.totalGenerations = 2;
+args.generations = 2;
 args.window = window;
 gui.addLsys( Lsys, args );
 
 args = presets[5];
 args.window = window;
-args.totalGenerations = 1;
+args.generations = 1;
 gui.addLsys( Lsys, args );
 
 gui.run();
