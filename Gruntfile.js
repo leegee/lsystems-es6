@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+  "use strict";
 
   grunt.initConfig({
     jshint: {
@@ -9,8 +10,10 @@ module.exports = function(grunt) {
       ],
       options: {
         esnext: true,
+        // globalstrict: true,
         globals: {
-          jQuery: true
+          jQuery: true,
+          require: true,
         }
       }
     },
