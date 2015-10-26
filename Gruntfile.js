@@ -47,12 +47,12 @@ module.exports = function(grunt) {
         },
         options: {}
       }
-    }
+    },
 
-    // watch: {
-    //   files: ['<%= jshint.files %>'],
-    //   tasks: ['jshint']
-    // }
+    watch: {
+      files: ['<%= jshint.files %>'],
+      tasks: ['jshint']
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-connect');
@@ -60,9 +60,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-browserify');
   // grunt.loadNpmTasks('grunt-mocha-phantomjs');
-  // grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['jshint']);
+  grunt.registerTask('default', ['jshint', 'mochaTest']);
 
   grunt.registerTask('see', ['jshint', 'mochaTest', 'browserify', 'connect']);
 
