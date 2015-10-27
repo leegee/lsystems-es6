@@ -5,10 +5,10 @@ requirejs.config({
     //By default load any module IDs from js/lib
     // baseUrl: '.',
     paths: {
-        Log4js: '../bower_components/log4javascript/log4javascript',
-        mustache: '../bower_components/mustache.js/mustache',
-        text: '../bower_components//text/text',
-        stache: '../bower_components/requirejs-mustache/stache'
+        Log4js: '../bower_components/log4javascript/log4javascript'
+        // mustache: '../bower_components/mustache.js/mustache',
+        // text: '../bower_components//text/text',
+        // stache: '../bower_components/requirejs-mustache/stache'
     },
     stache: {
         path: '../templates/'
