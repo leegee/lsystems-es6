@@ -115,14 +115,13 @@ describe('LsysMIDI', function (){
             });
 
             it("with processed rules", function (){
-                lsys.options.rules.should.be.instanceof(String);
-                lsys.options.rules.should.be.instanceof(Array);
-                lsys.options.rules.forEach( function ( i ) {
+                lsys.rules.should.be.instanceof(Array);
+                lsys.rules.forEach( function ( i ) {
                     i.should.be.instanceof(Array);
                     i.length.should.be.equal(3);
                 });
 
-                lsys.options.rules.should.deep.equal( [
+                lsys.rules.should.deep.equal( [
                     [ "F($s,$o)", "$s == $AS && $o == $R", "F($AS,$L)F($BS,$R)" ],
                     [ "F($s,$o)", "$s == $AS && $o == $L", "F($BS,$L)F($AS,$R)" ],
                     [ "F($s,$o)", "$s == $BS", "F($AS,$o)" ]
