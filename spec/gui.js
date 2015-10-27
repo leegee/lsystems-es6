@@ -70,7 +70,10 @@ describe('GUI', function (){
         gui.controls[0].getElement().nodeName.should.eql('DIV');
 
         describe('Controls', function (){
-            it('should have values', function (){
+            it('should have rulesIn values', function (){
+                window.document.getElementsByClassName('rulesIn').length.should.be.gt(0);
+            });
+            it('should have Rules values', function (){
                 window.document.getElementsByClassName('rules').length.should.be.gt(0);
             });
         });

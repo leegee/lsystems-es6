@@ -17,7 +17,7 @@ logger.setLevel('FATAL');
 
 var defaultOptions = {
     variables: "#define $W    0.5\n" + "#define $AS  2\n" + "#define $BS  1\n" + "#define $R   1\n" + "#define $L    -1",
-    rules: "F($s,$o) : $s == $AS && $o == $R -> F($AS,$L)F($BS,$R)\n" + "F($s,$o) : $s == $AS && $o == $L -> F($BS,$L)F($AS,$R)\n" + "F($s,$o) : $s == $BS             -> F($AS,$o)\n",
+    rulesIn: "F($s,$o) : $s == $AS && $o == $R -> F($AS,$L)F($BS,$R)\n" + "F($s,$o) : $s == $AS && $o == $L -> F($BS,$L)F($AS,$R)\n" + "F($s,$o) : $s == $BS             -> F($AS,$o)\n",
     // Axiom
     start: "!($W)F($BS,$R)"
 };
@@ -76,7 +76,7 @@ describe('LsysMIDI', function (){
                 expect( function () {
                     lsys = new Lsys( testOptions(
                         defaultOptions,
-                        {rules: 'X X X'})
+                        {rulesIn: 'X X X'})
                     );
                 }).to.throw(Lsys.ParseError);
             });
@@ -114,7 +114,8 @@ describe('LsysMIDI', function (){
                 fs.statSync( testOutputPath ).isFile().should.be.true;
             });
 
-            it("with rules", function (){
+            it("with processed rules", function (){
+                lsys.options.rules.should.be.instanceof(String);
                 lsys.options.rules.should.be.instanceof(Array);
                 lsys.options.rules.forEach( function ( i ) {
                     i.should.be.instanceof(Array);
@@ -148,7 +149,7 @@ describe('LsysMIDI', function (){
     describe('Non-parametric non-progressive', function () {
         var defaultOptions = {
             variables: "",
-            rules: "A -> AB\n" + "B->A",
+            rulesIn: "A -> AB\n" + "B->A",
             // Axiom
             start: "A"
         };
@@ -180,7 +181,7 @@ describe('LsysMIDI', function (){
     describe('Non-parametric progressive', function () {
         var defaultOptions = {
             variables: "",
-            rules: "A -> A+B-\n" + "B->A+",
+            rulesIn: "A -> A+B-\n" + "B->A+",
             // Axiom
             start: "A"
         };
@@ -212,7 +213,7 @@ describe('LsysMIDI', function (){
     describe('Parametric', function (done) {
         var defaultOptions = {
             variables: "#define $W    0.5\n" + "#define $AS  2\n" + "#define $BS  1\n" + "#define $R   1\n" + "#define $L    -1",
-            rules: "F($s,$o) : $s == $AS && $o == $R -> F($AS,$L)F($BS,$R)\n" + "F($s,$o) : $s == $AS && $o == $L -> F($BS,$L)F($AS,$R)\n" + "F($s,$o) : $s == $BS             -> F($AS,$o)\n",
+            rulesIn: "F($s,$o) : $s == $AS && $o == $R -> F($AS,$L)F($BS,$R)\n" + "F($s,$o) : $s == $AS && $o == $L -> F($BS,$L)F($AS,$R)\n" + "F($s,$o) : $s == $BS             -> F($AS,$o)\n",
             // Axiom
             start: "!($W)F($BS,$R)"
         };

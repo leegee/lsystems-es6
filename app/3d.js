@@ -12,7 +12,7 @@ var presets = [
 		generations: 3,
 		variables: '',
 		start: 'X',
-		rules: 'X -> F[+X]F[-X]+X\nF->FF',
+		rulesIn: 'X -> F[+X]F[-X]+X\nF->FF',
 		angle: 20,
 		init_x: 0,
 		init_y: 0,
@@ -27,7 +27,7 @@ var presets = [
 	{
 		title: 'Kock Ring Squared',
 		variables: '',
-		rules: 'F -> FF-F-F-F-FF\n',
+		rulesIn: 'F -> FF-F-F-F-FF\n',
 		start: 'F-F-F-F',
 		angle: 90,
 		generations: 4,
@@ -44,7 +44,7 @@ var presets = [
 	{
 		title: 'Kock Ring',
 		variables: '',
-		rules: 'F -> C0FF-F-F-F-F-FC1+F\n',
+		rulesIn: 'F -> C0FF-F-F-F-F-FC1+F\n',
 		start: 'F-F-F-F',
 		angle: 90,
 		generations: 4,
@@ -61,7 +61,7 @@ var presets = [
 	{
 		title: 'Tree Balanced',
 		variables: '',
-		rules: 'X -> C0FF[+X][-X]C1FC2X\n' +
+		rulesIn: 'X -> C0FF[+X][-X]C1FC2X\n' +
 			'F -> FF\n',
 		start: 'X',
 		angle: 40,
@@ -84,7 +84,7 @@ var presets = [
 			"#define $BS  1\n" +
 			"#define $R   1\n" +
 			"#define $L  -1",
-		rules: "F($s,$o) : $s == $AS && $o == $R -> F($AS,$L)F($BS,$R)\n" +
+		rulesIn: "F($s,$o) : $s == $AS && $o == $R -> F($AS,$L)F($BS,$R)\n" +
 			"F($s,$o) : $s == $AS && $o == $L -> F($BS,$L)F($AS,$R)\n" +
 			"F($s,$o) : $s == $BS                -> F($AS,$o)\n",
 		start: "!($W)F($BS,$R)",
@@ -102,7 +102,7 @@ var presets = [
 	{ // list all, even unused, keys on this first eleemnt
 		title: 'Tree 1',
 		variables: '',
-		rules: 'F->C0FF-[C1-F+F+F]+[C2+F-F-F]',
+		rulesIn: 'F->C0FF-[C1-F+F+F]+[C2+F-F-F]',
 		start: 'F',
 		angle: 22,
 		init_x: 0,
@@ -119,7 +119,7 @@ var presets = [
 	{
 		title: 'Tree x',
 		variables: '',
-		rules: "X->C0F-[C2[X]+C3X]+C1F[C3+FX]-X\nF->FF",
+		rulesIn: "X->C0F-[C2[X]+C3X]+C1F[C3+FX]-X\nF->FF",
 		start: 'X',
 		angle: 27,
 		init_x: 0,
@@ -134,7 +134,7 @@ var presets = [
 	}, {
 		title: 'Tree x',
 		variables: '',
-		rules: "X->C0F-[C2[X]+C3X]+C1F[C3+FX]-X\nF->FF",
+		rulesIn: "X->C0F-[C2[X]+C3X]+C1F[C3+FX]-X\nF->FF",
 		start: 'X',
 		angle: 27,
 		init_x: 0,
@@ -151,7 +151,7 @@ var presets = [
 	{
 		title: 'Sierpinski Median Curve (2 gens)',
 		variables: '',
-		rules: "L->+R-F-R+\nR->-L+F+L-",
+		rulesIn: "L->+R-F-R+\nR->-L+F+L-",
 		start: 'L--F--L--F',
 		angle: 45,
 		init_x: 0,
@@ -168,7 +168,7 @@ var presets = [
 	{
 		title: 'Sierpinski Median Curve (4 gens)',
 		variables: '',
-		rules: "L->+R-F-R+\nR->-L+F+L-",
+		rulesIn: "L->+R-F-R+\nR->-L+F+L-",
 		start: 'L--F--L--F',
 		angle: 45,
 		init_x: 0,
@@ -185,7 +185,7 @@ var presets = [
 	{
 		title: 'Koch Snowflake',
 		variables: '',
-		rules: "F->F-F++F-F\nX->FF",
+		rulesIn: "F->F-F++F-F\nX->FF",
 		start: 'F++F++F',
 		angle: 60,
 		init_x: 0,
@@ -202,7 +202,7 @@ var presets = [
 	{
 		title: 'Tree 3',
 		variables: '',
-		rules: 'F -> FF-[-F+F]+[+F-F]',
+		rulesIn: 'F -> FF-[-F+F]+[+F-F]',
 		start: 'F',
 		angle: 22,
 		init_x: 0,
@@ -218,7 +218,7 @@ var presets = [
 	{
 		title: 'Tree 4',
 		variables: '',
-		rules: "F -> F[-FF]F[+FF]F",
+		rulesIn: "F -> F[-FF]F[+FF]F",
 		start: 'F',
 		angle: 22,
 		init_x: 0,
@@ -234,7 +234,7 @@ var presets = [
 	{
 		title: 'Dragon Curve',
 		variables: '',
-		rules: "X->X+YF\nY->FX-Y",
+		rulesIn: "X->X+YF\nY->FX-Y",
 		start: 'FX',
 		angle: 90,
 		init_x: 800,
