@@ -1,6 +1,7 @@
 "use strict";
 var Lsys     = require("../lib/LsysParametric.MIDI"),
     GUI      = require("../lib/GUI"),
+    Midi     = require('jsmidgen'),
     chai     = require('chai'),
     expect   = chai.expect,
     should   = require('chai').should(),
@@ -58,6 +59,19 @@ describe('LsysMIDI', function (){
             var varName = '$AS';
             var lsys = new Lsys( testOptions(defaultOptions) );
             should.equal( parseFloat(lsys.interploateVars( varName )), 2);
+        });
+
+        it('should provide a jsmidgen MIDI File', function (){
+            var lsys = new Lsys( testOptions(defaultOptions) );
+            lsys.file.should.be.instanceof( Midi.File );
+        });
+
+        it('should accept a jsmidgen MIDI File', function (){
+            var midiFile = new Midi.File();
+            var lsys = new Lsys( testOptions(defaultOptions, {
+                midiFile: midiFile
+            }) );
+            lsys.file.should.equal( midiFile );
         });
 
         it('should parse variable strings and populate as expected', function (){
