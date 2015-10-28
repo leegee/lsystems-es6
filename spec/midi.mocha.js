@@ -182,7 +182,7 @@ describe('LsysMIDI', function (){
                 try {
                     var lsys = new Lsys( defaultOptions );
                     lsys.generate( g+1 );
-                    lsys.generation.should.equal( lsys.generations );
+                    lsys.generation.should.equal( lsys.options.generations );
                     lsys.content.should.equal( expectContent[ g ] );
                 } catch ( e ) {
                     console.error( e )
@@ -216,7 +216,7 @@ describe('LsysMIDI', function (){
             for ( var g = 0; g < expect.length; g++ ) {
                 var lsys = new Lsys( defaultOptions );
                 lsys.generate( g+1 );
-                lsys.generation.should.equal( lsys.generations );
+                lsys.generation.should.equal( lsys.options.generations );
                 lsys.content.should.equal( expect[ g ].content );
                 lsys.stave.should.deep.equal( expect[ g ].stave );
             }
@@ -247,7 +247,7 @@ describe('LsysMIDI', function (){
                 try {
                     var lsys = new Lsys( defaultOptions );
                     lsys.generate( g+1 );
-                    lsys.generation.should.equal( lsys.generations );
+                    lsys.generation.should.equal( lsys.options.generations );
                     lsys.content.should.equal( expectContent[ g ] );
                 } catch ( e ) {
                     console.error( e )

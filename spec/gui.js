@@ -47,7 +47,7 @@ describe('Test', function (){
         should.exist(window.document);
         var div = window.document.createElement('div')
         should.exist(div);
-        div.nodeName.should.eql('DIV')
+        div.nodeName.should.eql('DIV');
     });
 
     it('Should import GUI', function(){
@@ -77,7 +77,7 @@ describe('GUI', function (){
         gui.controls.should.be.instanceof( Array );
         gui.controls.should.be.length( 1 );
         gui.controls[0].should.be.instanceof( Controls );
-        gui.controls[0].getElement().nodeName.should.eql('DIV');
+        gui.controls[0].getElement().nodeName.should.eql('FORM');
 
         describe('DOM controls', function (){
             it('should have rulesIn values', function (){
