@@ -6,7 +6,7 @@
 // // ..... or
 
 var gui = require('nw.gui');
-var Lsys = require( "../lib/LsysParametric.2d.js" ),
+var Lsys = require( "../lib/LsysParametric/2d.js" ),
     GUI  = require( "../lib/GUI.js" );
 
 function main () {

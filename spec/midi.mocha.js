@@ -1,5 +1,5 @@
 "use strict";
-var Lsys     = require("../lib/LsysParametric.MIDI"),
+var Lsys     = require("../lib/LsysParametric/MIDI"),
     GUI      = require("../lib/GUI"),
     Midi     = require('jsmidgen'),
     chai     = require('chai'),

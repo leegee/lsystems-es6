@@ -1,10 +1,10 @@
 // http://lsys/browsify/eg/gui.html
 require([
-    "../lib/LsysParametric.2d.js",
+    "../lib/LsysParametric/2d.js",
     "../lib/Timeline.js",
     "../lib/GUI.js",
     "Log4js",
-    "../lib/Presets"
+    "../lib/LsysParametric/Presets"
 ], function (
     Lsys, Timeline, GUI, Log4js, presets
 ){

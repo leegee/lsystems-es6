@@ -4,8 +4,8 @@
 var GUI      = require("../lib/GUI"),
     Controls = require('../lib/Controls'),
     Timeline = require('../lib/Timeline'),
-    Lsys     = require("../lib/LsysParametric.2d.js"),
-    presets  = require("../lib/Presets.js"),
+    Lsys     = require("../lib/LsysParametric/2d.js"),
+    presets  = require("../lib/LsysParametric/Presets.js"),
     should   = require("chai").should(),
     Log4js   = require('Log4js'),
     jsdom    = require('jsdom');
