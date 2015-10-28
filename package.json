@@ -31,6 +31,7 @@
   "license": "ISC",
   "devDependencies": {
     "Log4js": "*",
+    "babel": "^5.8.29",
     "chai": "*",
     "es6ify": "^1.4.0",
     "grunt": "^0.4.5",
@@ -52,7 +53,9 @@
   },
   "dependencies": {
     "amdefine": "^1.0.0",
-    "imagemagick": "*"
+    "imagemagick": "*",
+    "react-no-jsx": "^0.1.0",
+    "react-tools": "^0.13.3"
   },
   "repository": "git@github.com:leegee/commonjs-play-lsystems.git"
 }

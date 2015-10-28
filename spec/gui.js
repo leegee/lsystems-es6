@@ -1,14 +1,18 @@
+/** GUI Tests **/
+
 "use strict";
 var GUI      = require("../lib/GUI"),
     Controls = require('../lib/Controls'),
+    Timeline = require('../lib/Timeline'),
     Lsys     = require("../lib/LsysParametric.2d.js"),
+    presets  = require("../lib/Presets.js"),
     should   = require("chai").should(),
     Log4js   = require('Log4js'),
     jsdom    = require('jsdom');
 
 Log4js.replaceConsole();
 var logger = Log4js.getLogger();
-logger.setLevel('DEBUG');
+logger.setLevel('INFO');
 
 var document,
     window = jsdom.jsdom().defaultView;
@@ -46,8 +50,14 @@ describe('Test', function (){
         div.nodeName.should.eql('DIV')
     });
 
-    it('Should import', function(){
+    it('Should import GUI', function(){
         should.exist(GUI);
+    });
+
+    it('Should import presets', function(){
+        should.exist(presets);
+        presets.should.be.instanceof(Array);
+        presets[0].should.be.instanceof(Object);
     });
 });
 
@@ -75,5 +85,11 @@ describe('GUI', function (){
             });
         });
     });
+});
 
+
+describe('GUI', function (){
+    var timeline = new Timeline({
+        window: window
+    });
 });

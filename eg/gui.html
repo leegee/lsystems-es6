@@ -4,14 +4,24 @@
     <head>
         <title>Configure an L-system</title>
         <meta charset="utf-8">
-        <!--script src="../build/bundle-gui.js"></script-->
-        <script src="../bower_components/requirejs/require.js"
-            data-main="../app/gui.js"></script>
+
         <link rel="stylesheet" type="text/css" href="../css/main.css">
         <style>
             body{background-color: #004400}
             canvas{background-color: white}
         </style>
+
+        <script src="../bower_components/requirejs/require.js"></script>
+
+        <script>
+        require(['../require.config'], function () {
+            console.info('Loaded require-global-config.js');
+            require(['../app/gui.js'], function () {
+                console.info('Required page-specific JS.');
+            });
+        });
+        </script>
+
     </head>
     <body/>
 </html>
