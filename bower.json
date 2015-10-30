@@ -33,7 +33,8 @@
     "stats.js": "*",
     "tweenjs": "*",
     "canvg": "~1.3.0",
-    "requirejs-react-jsx": "~0.15.0"
+    "requirejs-react-jsx": "~0.15.0",
+    "angular-bootstrap": "~0.14.3"
   },
   "homepage": "https://github.com/leegee/commonjs-play-lsystems"
 }
