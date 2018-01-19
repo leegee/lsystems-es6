@@ -8,7 +8,7 @@
 		"serve": "tiny-server",
 		"start": "webpack",
 		"xxx-test": "browserify spec/tests.js -o build/tests-bundle-2d.js --debug --verbose; node build/tests-bundle-2d.js",
-		"xxx-test3d": "browserify spec/tests.js -o build/tests-bundle-3d.js --debug --verbose; node build/tests-bundle-3d.js",
+		"xxx-test3d": "browserify spec/tests.js -o build/tests-bundle-3d.js --debug --verbose; node build/tests-bundle-3d.js"
 	},
 	"keywords": [
 		"l-system",

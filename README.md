@@ -4,8 +4,8 @@
 
     npm install
     npm install -g tiny-server
-    npm serve & # Starts a tiny-server, then open http://localhost:3000/eg/2d.html
-    npm run # npm debug
+    npm run serve & # Starts a tiny-server, then open http://localhost:3000/eg/2d.html
+    npm start # npm debug
 
 ## 2d
 
