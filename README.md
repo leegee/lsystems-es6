@@ -13,11 +13,13 @@ In progress: moving to normal es6.
 
 ## Sample Input
 
-    #define W	0.5
+The sample GUI contains several presets, but IIRC none use the following parametric input:
+
+    #define W    0.5
     #define AS 	 2
     #define BS 	 1
     #define R 	 1
-    #define L	-1
+    #define L    -1
 
 
     w : !(W)F(BS,R)
