@@ -50,7 +50,8 @@ fieldset.small * {
 	float: right;
 }
 canvas {
-	border: 1px solid gray
+	border: 1px solid gray;
+	width: 100%;
 }
 fieldset {
 	border: 1px solid gray;

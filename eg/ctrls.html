@@ -57,13 +57,10 @@
                         <p>
 
                             <label for='angle'>Angle</label>
-                            <input type='range' min=0 max=360 class='mooknob knob' id='angle' aria-valuemin='0' aria-valuemax='360' data-monitor='angle'>
-                            </span>
-                            <input type='text' id='wrap_angle_at' value='0'>
+                            <input type='range' id='angle' min=0 max=360 aria-valuemin='0' aria-valuemax='360'>
 
                             <label for='total_generations'>Generations</label>
-                            <input type='range' min=1 max=10 class='knob' id='total_generations'>
-                            </span>
+                            <input type='range' min=1 max=10 aria-valuemin=1 aria-valuemax=10 id='total_generations'>
                         </p>
                     </fieldset>
 
@@ -71,11 +68,9 @@
                         <legend>MIDI</legend>
                         <p>
                             <label for='duration'>Note&nbsp;duration</label>
-                            <input type='range' min=1 max=60 class='mooknob knob' id='duration-knob' data-monitor='duration' data-scale='0.1' aria-valuemin='1'
-                                aria-valuemax='60'>
-                            </span>
-                            <input type='text' id='duration' value='48' />
-
+                            <input type='range' min=1 max=60 id='duration' value=48 aria-valuemin='1' aria-valuemax='60'>
+                        </p>
+                        <p>
                             <label for='scale'>Scale</label>
                             <select id='scale'>
                                 <option>pentatonic</option>
@@ -83,7 +78,12 @@
                                 <option>fifths</option>
                             </select>
                         </p>
+                        <p>
+                            <label for='angle'>Wrap at angle</label>
+                            <input type='range' id='wrap_angle_at' min=0 max=360 aria-valuemin='0' aria-valuemax='360'>
+                        </p>
                     </fieldset>
+
                     <p class='submit'>
                         <input type='button' id='generate' value='Generate' />
                         <input type='button' id='createMidi' value='Generate MIDI' disabled='true' />
@@ -103,29 +103,18 @@
 
                     <p>
                         <label for='canvas_width'>Canvas width</label>
-                        <input type='range' min=100 max=2000 class='mooknob knob' id='canvas-width-knob' data-monitor='canvas_width' data-scale='0.5'
-                            aria-valuemin='100' aria-valuemax='2000'>
-                        </span>
-                        <input type='text' id='canvas_width' value='' />
+                        <input type='range' id='canvas-width' data-scale='0.5' min=100 max=2000  aria-valuemin='100' aria-valuemax='2000'>
                         <label for='canvas_height'>Canvas height</label>
-                        <input type='range' min=100 max=2000 class='mooknob knob' id='canvas-height-knob' data-monitor='canvas_height' data-scale='0.5'
-                            aria-valuemin='100' aria-valuemax='2000'>
-                        </span>
-                        <input type='text' id='canvas_height' value='' />
+                        <input type='range' id='canvas-height' data-scale='0.5' min=100 max=2000 aria-valuemin='100' aria-valuemax='2000'>
                     </p>
 
                     <p>
                         <label for='turtle_step_x'>Turtle Step X</label>
-                        <input type='range' min=1 max=50 class='mooknob knob' id='turtle_step_x-knob' data-monitor='turtle_step_x' data-scale='0.5'
-                            aria-valuemin='1' aria-valuemax='50'>
-                        </span>
-                        <input type='text' id='turtle_step_x' value='' />
+                        <input type='range'  id='turtle_step_x' data-monitor='turtle_step_x' min=1 max=50 aria-valuemin='1' aria-valuemax='50'>
 
                         <label for='turtle_step_y'>Turtle Step Y</label>
-                        <input type='range' min=1 max=50 class='mooknob knob' id='turtle_step_y-knob' data-monitor='turtle_step_y' data-scale='0.5'
-                            aria-valuemin='1' aria-valuemax='50'>
+                        <input type='range' id='turtle_step_y' min=1 max=50 aria-valuemin='1' aria-valuemax='50'>
                         </span>
-                        <input type='text' id='turtle_step_y' value='' />
                     </p>
 
                     <p>
@@ -136,9 +125,7 @@
                     </p>
                     <p>
                         <label for='line_width'>Line width</label>
-                        <input type='range' min=1 max=20 class='mooknob knob' id='line_width-knob' data-monitor='line_width' data-scale='0.5' aria-valuemin='1'
-                            aria-valuemax='20'>
-                        <input type='text' id='line_width' value='' />
+                        <input type='range' id='line_width' min=1 max=20 aria-valuemax='20' aria-valuemin='1'>
 
                         <label for 'generations_scale_lines'>Scale lines with age?</label>
                         <input type='checkbox' checked='true' name='generations_scale_lines' id='generations_scale_lines' />
@@ -147,9 +134,7 @@
             </form>
         </section>
 
-        <section id='canvases'>
-            <canvas id='lsys-canvas'></canvas>
-        </section>
+        <section id='canvases'></section>
     </main>
 </body>
 

@@ -4,4 +4,6 @@ import {
 
 document.addEventListener('DOMContentLoaded', () => {
 	new Ctrls().init();
+}, {
+	passive: true
 });
