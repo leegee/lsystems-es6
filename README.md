@@ -4,8 +4,8 @@
 
     npm install
     npm install -g tiny-server
-    npm start &; # tiny-server    # http://localhost:3000/eg/2d.html
-    npm webpack;
+    npm start & # Starts a tiny-server, then open http://localhost:3000/eg/2d.html
+    npm run webpack;
 
 Legacy code that needs a bit of a rewrite.
 

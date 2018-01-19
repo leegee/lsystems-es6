@@ -86,7 +86,7 @@ textarea {
 	padding: 0;
 }
 #presets li {
-	display: inline-block;
+	display: block;
 	margin-right: 1em;
 	margin-left: 0;
 }
