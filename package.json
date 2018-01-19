@@ -1,12 +1,11 @@
 {
 	"name": "commonjs-play-lsystems",
 	"version": "1.0.0",
-	"description": "L-system tools",
+	"description": "Common-js L-system Tools For Sound",
 	"main": "main.js",
 	"scripts": {
 		"test": "browserify spec/tests.js -o build/tests-bundle-2d.js --debug --verbose; node build/tests-bundle-2d.js",
-        "build2d": "browserify app/2d.js -o build/bundle-2d.js",
-        "build2d": "browserify app/3d.js browserify app/3d.js -o build/bundle-3d.js",
+		"build2d": "browserify app/3d.js browserify app/3d.js -o build/bundle-3d.js",
 		"watch2d": "watchify app/2d.js -o build/bundle-2d.js --debug --verbose",
 		"watch3d": "watchify app/3d.js -o build/bundle-3d.js --debug --verbose"
 	},
@@ -15,12 +14,16 @@
 		"lsystem",
 		"lsys",
 		"lindenmeyer",
-		"system"
+		"system",
+		"midi",
+		"sound"
 	],
 	"author": "lee goddard",
 	"license": "ISC",
 	"devDependencies": {
-		"es6ify": "^1.4.0"
+		"es6ify": "^1.4.0",
+		"watchify": "^3.9.0"
 	},
-	"repository": "git@github.com:leegee/commonjs-play-lsystems.git"
+	"repository": "git@github.com:leegee/commonjs-play-lsystems.git",
+	"dependencies": {}
 }
