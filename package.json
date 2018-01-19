@@ -2,7 +2,7 @@
 	"name": "commonjs-play-lsystems",
 	"version": "1.0.1",
 	"description": "L-system Tools For Sound",
-	"main": "eg/2d.html",
+	"main": "eg/index.html",
 	"scripts": {
 		"debug": "webpack --display-error-details --config webpack.config.js",
 		"serve": "tiny-server",
