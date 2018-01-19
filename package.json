@@ -1,13 +1,18 @@
 {
 	"name": "commonjs-play-lsystems",
-	"version": "1.0.0",
-	"description": "Common-js L-system Tools For Sound",
-	"main": "main.js",
+	"version": "1.0.1",
+	"description": "L-system Tools For Sound",
+	"main": "eg/2d.html",
 	"scripts": {
+		"debug": "webpack --display-error-details --config webpack.config.js",
+		"start": "tiny-server",
+		"webpack": "webpack",
 		"test": "browserify spec/tests.js -o build/tests-bundle-2d.js --debug --verbose; node build/tests-bundle-2d.js",
-		"build2d": "browserify app/3d.js browserify app/3d.js -o build/bundle-3d.js",
+		"xxx-test3d": "browserify spec/tests.js -o build/tests-bundle-3d.js --debug --verbose; node build/tests-bundle-3d.js",
+		"build2d": "browserify app/2d.js browserify app/2d.js -o build/bundle-2d.js",
 		"watch2d": "watchify app/2d.js -o build/bundle-2d.js --debug --verbose",
-		"watch3d": "watchify app/3d.js -o build/bundle-3d.js --debug --verbose"
+		"watch3d": "watchify app/3d.js -o build/bundle-3d.js --debug --verbose",
+		"build3d": "browserify app/3d.js browserify app/3d.js -o build/bundle-3d.js"
 	},
 	"keywords": [
 		"l-system",
@@ -18,11 +23,15 @@
 		"midi",
 		"sound"
 	],
-	"author": "lee goddard",
+	"author": "Lee Goddard",
 	"license": "ISC",
 	"devDependencies": {
-		"es6ify": "^1.4.0",
-		"watchify": "^3.9.0"
+		"babel": "^6.23.0",
+		"babel-core": "^6.26.0",
+		"babel-loader": "^7.1.2",
+		"babel-polyfill": "^6.26.0",
+		"babel-preset-stage-2": "^6.24.1",
+		"webpack": "^3.10.0"
 	},
 	"repository": "git@github.com:leegee/commonjs-play-lsystems.git",
 	"dependencies": {}
