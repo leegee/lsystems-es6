@@ -11,9 +11,17 @@ Legacy code that needs a bit of a rewrite.
 
 In progress: moving to normal es6.
 
+## 2d 
+
+2d is solid, but 3d is just a wip experiment.
+
+## Sound
+
+This module does not include the sound generation.
+
 ## Sample Input
 
-The sample GUI contains several presets, but IIRC none use the following parametric input:
+The sample GUI contains several presets, using the following style:
 
     #define W    0.5
     #define AS 	 2
