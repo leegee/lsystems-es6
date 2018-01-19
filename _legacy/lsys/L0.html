@@ -10,8 +10,8 @@
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/mootools/1.4/mootools-yui-compressed.js"></script>
 
 		<script type="text/javascript"
-			src='http://lee/MooKnob/Mootools-Knob/Source/Knob.js'></script>
-		
+			src='/MooKnob/Mootools-Knob/Source/Knob.js'></script>
+
 		<script type="text/javascript" src="js/lsys.js"></script>
 		<link rel="stylesheet" href="/css/lsys.css" type="text/css" media="all" />
 
@@ -35,7 +35,7 @@
 						"F($s,$o) : $s == $AS && $o == $R -> F($AS,$L)F($BS,$R)\n" +
 						"F($s,$o) : $s == $AS && $o == $L -> F($BS,$L)F($AS,$R)\n" +
 						"F($s,$o) : $s == $BS	             -> F($AS,$o)\n",
-					start			: "!($W)F($BS,$R)", 
+					start			: "!($W)F($BS,$R)",
 					angle			: 22,
 					init_x			: 0,
 					init_y			: 0,
@@ -46,7 +46,7 @@
 					generations		: 3,
 					line_width		: 4
 				},
-				{			
+				{
 					title			: 'Tree x',
 					rules			: "X:=C0F-[C2[X]+C3X]+C1F[C3+FX]-X\nF:=FF",
 					start			: 'X',
@@ -60,7 +60,7 @@
 					generations		: 6,
 					line_width		: 3
 				},
-				{			
+				{
 					title			: 'Tree x',
 					rules			: "X:=C0F-[C2[X]+C3X]+C1F[C3+FX]-X\nF:=FF",
 					start			: 'X',
@@ -74,7 +74,7 @@
 					generations		: 6,
 					line_width		: 3
 				},
-				{			
+				{
 					title			: 'Sierpinski Median Curve (2 gens)',
 					rules			: "L:=+R-F-R+\nR:=-L+F+L-",
 					start			: 'L--F--L--F',
@@ -88,7 +88,7 @@
 					generations		: 2,
 					line_width		: 3
 				},
-				{			
+				{
 					title			: 'Sierpinski Median Curve (4 gens)',
 					rules			: "L=+R-F-R+\nR=-L+F+L-",
 					start			: 'L--F--L--F',
@@ -184,13 +184,13 @@
 						);
 					});
 				}
-				
+
 				var midi = $('midi');
 				var createMidi = $('createMidi');
 				var generate = $('generate');
 				var el_canvases = $('canvases');
 				var contentDisplay = $('contentDisplay');
-				var lsys = null;	
+				var lsys = null;
 
 				new Knob({
 					element: 'generations-knob',
@@ -201,17 +201,17 @@
 
 				listPresets();
 				loadPreset(0);
-				
+
 				generate.addEvent('click', function(e){
 					generate.set('value','Generating...');
 					generate.set('disabled', true);
 					createMidi.set('disabled', true);
-					
+
 					var options = {};
 					Object.keys(presets[0]).each( function(i){
 						options[i] = $(i).value;
 					});
-					
+
 					var el_t = new Element('div', {
 						'class':'timing',
 						text: new Date().getTime()
@@ -231,13 +231,13 @@
 					createMidi.set('disabled', false);
 					return false;
 				});
-				
+
 				createMidi.addEvent('click', function(){
 					createMidi.set('value', 'Hang on...');
 					createMidi.set('disabled', true);
 					new Request.JSON({
-						url: '/cgi-bin/fractal_plant_chords.cgi', 
-						onFailure: function(e){ 
+						url: '/cgi-bin/fractal_plant_chords.cgi',
+						onFailure: function(e){
 							alert('Not available from your IP');
 							console.log(e);
 						},
@@ -255,7 +255,7 @@
 						duration: $('duration').value,
 						angle: $('angle').value,
 						scale: $('scale').value
-					})	
+					})
 				});
 			});
 		</script>
@@ -264,13 +264,13 @@
  
 	<body>
 		<h1>L-systems in HTML5</h1>
-		
+
 		<nav>
-			Simple L-System 
+			Simple L-System
 			|
 			<a href='parametric.html'>Parametric L-System</a>
 		</nav>
-		
+
 		<form id='controls'>
 			<div class='left'>
 				<fieldset><legend id='title'>Loading</legend>
@@ -295,13 +295,13 @@
 						data-monitor='angle'
 					></span>
 					<input type='text' id='angle' value='' />
-					
+
 					<label for='generations'>Generations</label>
 					<span class='knob' id='generations-knob'></span>
 					<input type='text' id='generations' value=''/>
 				</p>
 				</fieldset>
-				
+
 				<fieldset><legend>MIDI</legend>
 				<p>
 					<label for='duration'>Note&nbsp;duration</label>
@@ -312,7 +312,7 @@
 						aria-valuemax='60'
 					></span>
 					<input type='text' id='duration' value='48'/>
-					
+
 					<label for='scale'>Scale</label>
 					<select id='scale'>
 						<option>pentatonic</option>
@@ -328,7 +328,7 @@
 					<small>(Music on local laptop only)</small>
 				</p>
 			</div>
-			
+
 			<div class='right'>
 				<fieldset><legend>Presets</legend>
 					<ul id='presets'></ul>
@@ -372,7 +372,7 @@
 					></span>
 					<input type='text' id='turtle_step_y' value=''/>
 				</p>
-				
+
 				<p>
 					<label for='init_x'>Init X</label>
 					<input type='text' id='init_x' value=''/>
@@ -388,13 +388,13 @@
 						aria-valuemax='20'
 					></span>
 					<input type='text' id='line_width' value=''/>
-					
+
 					<label for'generations_scale_lines'>Scale lines with age?</label>
 					<input type='checkbox' checked='true' name='generations_scale_lines' id='generations_scale_lines'/>
 				</p>
 			</div>
 		</form>
-		
+
 		<div id='canvases'></div>
 	</body>
 </html>
