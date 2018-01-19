@@ -9,7 +9,10 @@
 
 ## 2d
 
-2d is solid, but 3d is just a wip experiment.
+Whilst 3d is just a wip experiment, 2d was solid, until I ported
+from MooTools to CommonJS to ES6 -- I seem to have lost something
+along the way, relating to the position/scaling in the canvas.
+Shall get back to that.
 
 ## Sound
 

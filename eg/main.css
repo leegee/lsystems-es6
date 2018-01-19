@@ -79,7 +79,7 @@ input[type="text"] {
 }
 textarea {
     width: 99%;
-    min-height: 3em;
+    min-height: 7em;
     overflow: auto;
 }
 #presets {
