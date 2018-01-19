@@ -1,0 +1,33 @@
+<html>
+<body style=margin:3px; bgcolor=#dddddd>
+<script type="text/javascript" language="JavaScript">
+<!--
+
+var sUsrAgt = navigator.userAgent;
+var sSearch = self.location.search;
+var sNameLC = sSearch.toLowerCase().substring(1);
+var nameLen = sNameLC.length;
+var sType   = 'unknown';
+
+if (sNameLC.lastIndexOf('.au') >nameLen-6) sType="audio/basic";
+if (sNameLC.lastIndexOf('.ra') >nameLen-6) sType="audio/x-pn-realaudio";
+if (sNameLC.lastIndexOf('.rm') >nameLen-6) sType="audio/x-pn-realaudio";
+if (sNameLC.lastIndexOf('.mid')>nameLen-6) sType="audio/midi";
+if (sNameLC.lastIndexOf('.mp3')>nameLen-6) sType="audio/mpeg";
+if (sNameLC.lastIndexOf('.wav')>nameLen-6) sType="audio/wav";
+
+if (sSearch.length<3) document.bgColor="white";
+else if (sNameLC=='stop' ) document.writeln('<center><small>Audio stopped.</small></center>');
+else if (sType=='unknown') document.writeln('<center><small>Unknown audio file type.</small></center>');
+else 
+{ // WRITE HTML TAGS FOR AUDIO PLAYBACK
+  if (sUsrAgt.indexOf('Opera')!=-1||sUsrAgt.indexOf('MSIE')!=-1) document.writeln('<bgsound volume=-1000 LOOP=1 src="'+encodeURI(sSearch.substring(1,99))+'">');
+  else document.writeln('<object width=194 height=16 data="'+encodeURI(sSearch.substring(1,99))+'" type="'+sType+'"></object>');
+}
+
+-->
+</script>
+<noscript><p align=center>Please enable JavaScript.</p>
+</noscript>
+</body>
+</html>
