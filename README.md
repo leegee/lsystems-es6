@@ -4,14 +4,10 @@
 
     npm install
     npm install -g tiny-server
-    npm start & # Starts a tiny-server, then open http://localhost:3000/eg/2d.html
-    npm run webpack;
+    npm serve & # Starts a tiny-server, then open http://localhost:3000/eg/2d.html
+    npm run # npm debug
 
-Legacy code that needs a bit of a rewrite.
-
-In progress: moving to normal es6.
-
-## 2d 
+## 2d
 
 2d is solid, but 3d is just a wip experiment.
 
