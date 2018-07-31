@@ -30,5 +30,7 @@
 		"webpack": "^3.10.0"
 	},
 	"repository": "git@github.com:leegee/commonjs-play-lsystems.git",
-	"dependencies": {}
+	"dependencies": {
+		"help": "^3.0.2"
+	}
 }
