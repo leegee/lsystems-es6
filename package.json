@@ -5,7 +5,7 @@
 	"main": "eg/index.html",
 	"scripts": {
 		"debug": "webpack --display-error-details --config webpack.config.js",
-		"serve": "tiny-server",
+		"serve": "PORT=4321 tiny-server .",
 		"start": "webpack",
 		"xxx-test": "browserify spec/tests.js -o dist/tests-bundle-2d.js --debug --verbose; node dist/tests-bundle-2d.js",
 		"xxx-test3d": "browserify spec/tests.js -o dist/tests-bundle-3d.js --debug --verbose; node dist/tests-bundle-3d.js"

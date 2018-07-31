@@ -2,17 +2,17 @@
 
 ## Setup
 
-    npm install
-    npm install -g tiny-server
-    npm run serve & # Starts a tiny-server, then open http://localhost:3000/eg/2d.html
-    npm start # npm debug
+    yarn
+    yarn global add tiny-server
+    yarn serve & # Starts a tiny-server, then open http://localhost:4321/eg/2d.html
+    yarn start 
+    # yarn debug
 
 ## 2d
 
 Whilst 3d is just a wip experiment, 2d was solid, until I ported
 from MooTools to CommonJS to ES6 -- I seem to have lost something
 along the way, relating to the position/scaling in the canvas.
-Shall get back to that.
 
 ## Sound
 
@@ -27,7 +27,6 @@ The sample GUI contains several presets, using the following style:
     #define BS 	 1
     #define R 	 1
     #define L    -1
-
 
     w : !(W)F(BS,R)
     p1 : F(s,o) : s == AS && o == R -> F(AS,L)F(BS,R)
