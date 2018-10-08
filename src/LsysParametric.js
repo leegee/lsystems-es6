@@ -445,7 +445,6 @@ export class LsysParametric {
 		var hi = (this.min_y < 0) ?
 			Math.abs(this.min_y) + Math.abs(this.max_y) : this.max_y - this.min_y;
 		if (this.max_y <= 0 || this.max_x <= 0) {
-			alert('oops');
 			throw new RangeError('Max_x or max_y out of bounds');
 		}
 
