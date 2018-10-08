@@ -196,24 +196,22 @@ describe('Math routines', () => {
 	});
 });
 
-/*
-
 // ## Generate content
 
-test('Generated content', function () {
-	// Test each generation
-	for (var g = 1; g < expectContent.length; g++) {
-		// Let not an error stop the next test
-		try {
-			var lsys = new Lsys(defaultOptions);
-			lsys.generate(g);
-			equal(lsys.generation, g, 'lsys.generation ' + g);
-			equal(lsys.total_generations, g, 'total_generations ' + g);
-			equal(lsys.content, expectContent[g], 'content ' + g);
-		} catch (e) {
-			console.error(e)
+describe('Generated content', () => {
+	it('generation', () => {
+		// Test incremental generation
+		for (var g = 1; g < expectContent.length; g++) {
+			// Let not an error stop the next test
+			try {
+				var lsys = new LsysParametric(defaultOptions);
+				lsys.generate(g);
+				expect(lsys.generation).to.equal(g, 'lsys.generation ' + g);
+				expect(lsys.total_generations).to.equal(g, 'total_generations ' + g);
+				expect(lsys.content).to.equal(expectContent[g], 'content ' + g);
+			} catch (e) {
+				console.error(e)
+			}
 		}
-	}
+	});
 });
-
-*/
