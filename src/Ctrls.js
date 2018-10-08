@@ -1,10 +1,6 @@
-import {
-    Lsys
-} from "./LsysParametric";
+import { LsysParametric } from "./LsysParametric";
 
-import {
-    Presets
-} from "./presets";
+import { Presets } from "./presets";
 
 // remember the original reacted to Knob, replicate with new input type=range
 
@@ -79,7 +75,7 @@ export class Ctrls {
             let canvas = document.createElement('canvas');
             options.canvas = this.el_canvases.insertBefore(canvas, this.el_canvases.firstChild);;
 
-            const lsys = new Lsys(options, canvas);
+            const lsys = new LsysParametric(options, canvas);
             lsys.generate(options.total_generations);
             if (this.elTimeDisplay) {
                 this.elTimeDisplay.innerText = 'Generated in ' + (new Date().getTime() - (elTimeDisplay.get('text'))) + ' ms';

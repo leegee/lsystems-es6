@@ -29,7 +29,7 @@ rule p3
 
 const RAD = Math.PI / 180.0;
 
-export class Lsys {
+export class LsysParametric {
 	options = {
 		start: 'F',
 		variables: '',
@@ -395,9 +395,6 @@ export class Lsys {
 
 	turtle_graph(dir) {
 		// console.debug('Move '+dir +' from '+this.x+','+this.y);
-
-		var oldLOGGER = LOGGER;
-		LOGGER = console;
 
 		this.ctx.beginPath();
 		if (this.options.time_scale_lines > 0) {
