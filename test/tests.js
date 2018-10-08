@@ -141,7 +141,7 @@ describe('Constructor', () => {
 	it('processes string to re and arg name', function () {
 		var rv = new LsysParametric(defaultOptions).string2reAndArgNames('F(s,o)');
 		expect(rv).to.be.an('array', 'rv type');
-		expect(rv).to.have.length(2,'rv length');
+		expect(rv).to.have.length(2, 'rv length');
 		expect(rv[0]).to.be.a('regexp', 'rv regexp');
 
 		const varWord = '\([\\$\\w-]+\)';
@@ -151,19 +151,19 @@ describe('Constructor', () => {
 		expect(rv[1]).to.deep.equal(['s', 'o'], 'rv var names value');
 	});
 
+	it('fails to construct with bad rules', function () {
+		const badOptions = {
+			...defaultOptions,
+			canvas: document.createElement('canvas')
+		};
+		badOptions.rules = 'This is not a rule.';
+		expect(() => {
+			new LsysParametric(badOptions);
+		}).to.throw(/parse error/gi, 'Bad rule parse error thrown');
+	});
 });
 
 /*
-
-test('Constructor with bad rules', function () {
-	var badOptions = Object.clone(defaultOptions);
-	badOptions.rules = 'This is not a rule.';
-	try {
-		var lsys = new Lsys(badOptions);
-	} catch (e) {
-		ok(e.match(/parse error/gi), 'Bad rule parse error thrown');
-	}
-});
 
 test('Bad variables option', function () {
 	var badOptions = Object.clone(defaultOptions);
