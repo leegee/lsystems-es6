@@ -161,23 +161,18 @@ describe('Constructor', () => {
 			new LsysParametric(badOptions);
 		}).to.throw(/parse error/gi, 'Bad rule parse error thrown');
 	});
+
+	it('with bad variables option', function () {
+		const badOptions = {
+			...defaultOptions,
+			canvas: document.createElement('canvas')
+		};
+		badOptions.variables = 'This is not a variable definition.';
+		expect(() => { new Lsys(badOptions) }).to.throw(/variable def/gi, 'Bad variable parse error thrown as hoped');
+	});
 });
 
 /*
-
-test('Bad variables option', function () {
-	var badOptions = Object.clone(defaultOptions);
-	badOptions.variables = 'This is not a variable definition.';
-	try {
-		var lsys = new Lsys(badOptions);
-	} catch (e) {
-		console.log(e);
-		ok(
-			e.match(/variable def/gi),
-			'Bad variable parse error thrown as hoped'
-		);
-	}
-});
 
 test('Variable parsing', function () {
 	var varOpts = Object.clone(defaultOptions);
