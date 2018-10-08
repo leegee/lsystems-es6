@@ -3,10 +3,7 @@
 ## Setup
 
     yarn
-    yarn global add tiny-server
-    yarn serve & # Starts a tiny-server, then open http://localhost:4321/eg/2d.html
     yarn start 
-    # yarn debug
 
 ## 2d
 

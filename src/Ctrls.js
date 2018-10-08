@@ -1,10 +1,10 @@
 import {
     Lsys
-} from "../lib/LsysParametric";
+} from "./LsysParametric";
 
 import {
     Presets
-} from "../lib/presets";
+} from "./presets";
 
 // remember the original reacted to Knob, replicate with new input type=range
 

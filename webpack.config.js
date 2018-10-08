@@ -1,31 +1,60 @@
-var path = require('path');
-var webpack = require('webpack');
-
-// mocha --compilers js:babel-core/register --require babel-polyfill
+const path = require('path');
+const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-    entry: ['babel-polyfill', path.resolve(__dirname, './app/2d.js')],
+    mode: 'development',
+    entry: {
+        app: [
+            'webpack-dev-server/client?http://localhost:8080',
+            './src/2d'
+        ]
+    },
+    devtool: 'source-map',
+    devServer: {
+        contentBase: path.resolve(__dirname, 'dist'),
+        hot: true
+    },
     output: {
-        path: path.resolve(__dirname, './dist/'),
-        filename: 'main.bundle.js'
-    },
-    module: {
-        loaders: [{
-            test: /\.js$/,
-            loader: 'babel-loader',
-            exclude: /node_modules/,
-            query: {
-                presets: ['es2015', 'stage-2']
-            }
-        }]
-    },
-    stats: {
-        colors: false,
-        errorDetails: true
+        filename: '[name].js',
+        path: path.resolve(__dirname, '..', 'dist')
     },
     node: {
         fs: 'empty'
     },
-    watch: true,
-    devtool: 'source-map'
+    module: {
+        rules: [
+            {
+                test: /\.m?js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
+            }
+        ]
+    },
+    resolve: {
+        extensions: [
+            '.js', '.html'
+        ]
+    },
+    plugins: [
+        new CleanWebpackPlugin(['dist'], { verbose: true, root: path.resolve(__dirname) }),
+        new HtmlWebpackPlugin({
+            template: './static/index.html'
+        }),
+        new CopyWebpackPlugin([
+            {
+                from: path.resolve(__dirname, './static'),
+                to: 'static'
+            }
+        ]),
+        new webpack.IgnorePlugin(/vertx/),
+        new webpack.HotModuleReplacementPlugin(),
+    ]
 };

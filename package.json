@@ -4,9 +4,8 @@
 	"description": "L-system Tools For Sound",
 	"main": "eg/index.html",
 	"scripts": {
-		"debug": "webpack --display-error-details --config webpack.config.js",
-		"serve": "PORT=4321 tiny-server .",
-		"start": "webpack",
+		"build": "webpack",
+		"start": "webpack-dev-server",
 		"xxx-test": "browserify spec/tests.js -o dist/tests-bundle-2d.js --debug --verbose; node dist/tests-bundle-2d.js",
 		"xxx-test3d": "browserify spec/tests.js -o dist/tests-bundle-3d.js --debug --verbose; node dist/tests-bundle-3d.js"
 	},
@@ -17,20 +16,26 @@
 		"lindenmeyer",
 		"system",
 		"midi",
-		"sound"
+		"sound",
+		"generative music",
+		"fractal"
 	],
 	"author": "Lee Goddard",
 	"license": "ISC",
 	"devDependencies": {
-		"babel": "^6.23.0",
-		"babel-core": "^6.26.0",
-		"babel-loader": "^7.1.2",
-		"babel-polyfill": "^6.26.0",
-		"babel-preset-stage-2": "^6.24.1",
-		"webpack": "^3.10.0"
+		"@babel/core": "^7.1.2",
+		"@babel/plugin-proposal-class-properties": "^7.1.0",
+		"@babel/preset-env": "^7.1.0",
+		"babel-loader": "^8.0.4",
+		"clean-webpack-plugin": "^0.1.19",
+		"copy-webpack-plugin": "^4.5.2",
+		"html-webpack-plugin": "^3.2.0",
+		"webpack": "^4.20.2",
+		"webpack-cli": "^3.1.2"
 	},
 	"repository": "git@github.com:leegee/commonjs-play-lsystems.git",
 	"dependencies": {
-		"help": "^3.0.2"
+		"help": "^3.0.2",
+		"webpack-dev-server": "^3.1.9"
 	}
 }

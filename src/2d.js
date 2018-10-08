@@ -1,6 +1,6 @@
 import {
 	Ctrls
-} from '../lib/Ctrls';
+} from '../src/Ctrls';
 
 document.addEventListener('DOMContentLoaded', () => {
 	new Ctrls().init();

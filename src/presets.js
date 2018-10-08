@@ -244,5 +244,3 @@ export const Presets = [
 		wrap_angle_at: 12
 	}
 ];
-
-

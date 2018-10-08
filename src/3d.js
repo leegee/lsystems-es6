@@ -1,9 +1,6 @@
 "use strict";
 
-// var logger = {};
-// logger.trace = logger.log = logger.warn =
-//  logger.debug = logger.info = function () {};
-var Lsys = require( "../lib/3d.js" );
+var Lsys = require( "./lib/3d.js" );
 
 var presets = [
 
