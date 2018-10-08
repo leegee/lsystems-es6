@@ -168,27 +168,35 @@ describe('Constructor', () => {
 			canvas: document.createElement('canvas')
 		};
 		badOptions.variables = 'This is not a variable definition.';
-		expect(() => { new Lsys(badOptions) }).to.throw(/variable def/gi, 'Bad variable parse error thrown as hoped');
+		expect(() => { new LsysParametric(badOptions) }).to.throw(/variable def/gi, 'Bad variable parse error thrown as hoped');
+	});
+
+	it('variable parsing', function () {
+		const varOpts = {
+			...defaultOptions,
+			canvas: document.createElement('canvas')
+		};
+		varOpts.variables += "\n#define $Test -0.5";
+		var lsys = new LsysParametric(varOpts);
+		expect(lsys.variables.$AS).to.equal(2, 'positive int');
+		expect(lsys.variables.$L).to.equal(-1, 'negative int');
+		expect(lsys.variables.$W).to.equal(0.5, 'positive float');
+		expect(lsys.variables.$Test).to.equal(-0.5, 'negative float');
+	});
+});
+
+describe('Math routines', () => {
+	let lsys;
+	beforeEach(() => {
+		lsys = new LsysParametric(defaultOptions);
+	});
+	it('dsin', () => {
+		expect(lsys.dsin(1)).to.equal(0.01745240643728351, 'sin');
+		expect(lsys.dcos(1)).to.equal(0.9998476951563913, 'sin');
 	});
 });
 
 /*
-
-test('Variable parsing', function () {
-	var varOpts = Object.clone(defaultOptions);
-	varOpts.variables += "\n#define $Test -0.5";
-	var lsys = new Lsys(varOpts);
-	equal(lsys.variables.$AS, 2, 'positive int');
-	equal(lsys.variables.$L, -1, 'negative int');
-	equal(lsys.variables.$W, 0.5, 'positive float');
-	equal(lsys.variables.$Test, -0.5, 'negative float');
-});
-
-test('Math routines', function () {
-	var lsys = new Lsys(defaultOptions);
-	equal(lsys.dsin(1), 0.01745240643728351, 'sin');
-	equal(lsys.dcos(1), 0.9998476951563913, 'sin');
-});
 
 // ## Generate content
 
