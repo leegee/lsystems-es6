@@ -81,7 +81,13 @@ export class LsysParametric {
 
 	initialize(options = {}) {
 		this.colour = this.options.colours[0];
+		if (!this.options.canvas) {
+			throw new Error('No options.canvas!');
+		}
 		this.ctx = this.options.canvas.getContext("2d");
+		if (!this.ctx) {
+			throw new Error('No ctx from options.canvas!');
+		}
 		// Translate context to center of canvas:
 		this.ctx.translate(this.options.canvas.width / 2, this.options.canvas.height / 2);
 		// Flip context vertically

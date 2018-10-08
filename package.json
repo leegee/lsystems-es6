@@ -6,8 +6,7 @@
 	"scripts": {
 		"build": "webpack",
 		"start": "webpack-dev-server --open --config ./webpack.config.js",
-		"xxx-test": "browserify spec/tests.js -o dist/tests-bundle-2d.js --debug --verbose; node dist/tests-bundle-2d.js",
-		"xxx-test3d": "browserify spec/tests.js -o dist/tests-bundle-3d.js --debug --verbose; node dist/tests-bundle-3d.js"
+		"test": "mocha -r jsdom-global/register  -r @babel/register"
 	},
 	"keywords": [
 		"l-system",
@@ -26,11 +25,16 @@
 		"@babel/core": "^7.1.2",
 		"@babel/plugin-proposal-class-properties": "^7.1.0",
 		"@babel/preset-env": "^7.1.0",
+		"@babel/register": "^7.0.0",
 		"babel-loader": "^8.0.4",
+		"chai": "^4.2.0",
 		"clean-webpack-plugin": "^0.1.19",
 		"copy-webpack-plugin": "^4.5.2",
 		"html-loader": "^0.5.5",
 		"html-webpack-plugin": "^3.2.0",
+		"jsdom": "^12.2.0",
+		"jsdom-global": "^3.0.2",
+		"mocha": "^5.2.0",
 		"webpack": "^4.20.2",
 		"webpack-cli": "^3.1.2"
 	},
