@@ -8,22 +8,23 @@ module.exports = {
     mode: 'development',
     entry: {
         app: [
-            'webpack-dev-server/client?http://localhost:8080',
+            // 'webpack-dev-server/client?http://localhost:8080',
             './src/2d'
         ]
     },
     devtool: 'source-map',
     devServer: {
         contentBase: path.resolve(__dirname, 'dist'),
+        port: 9090,
         hot: true
     },
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, '..', 'dist')
     },
-    node: {
-        fs: 'empty'
-    },
+    // node: {
+    //     fs: 'empty'
+    // },
     module: {
         rules: [
             {
@@ -40,13 +41,13 @@ module.exports = {
     },
     resolve: {
         extensions: [
-            '.js', '.html'
+            '.mjs', '.js', '.html'
         ]
     },
     plugins: [
         new CleanWebpackPlugin(['dist'], { verbose: true, root: path.resolve(__dirname) }),
         new HtmlWebpackPlugin({
-            template: './static/index.html'
+            template: 'static/index.html'
         }),
         new CopyWebpackPlugin([
             {

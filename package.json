@@ -5,7 +5,7 @@
 	"main": "eg/index.html",
 	"scripts": {
 		"build": "webpack",
-		"start": "webpack-dev-server",
+		"start": "webpack-dev-server --open --config ./webpack.config.js",
 		"xxx-test": "browserify spec/tests.js -o dist/tests-bundle-2d.js --debug --verbose; node dist/tests-bundle-2d.js",
 		"xxx-test3d": "browserify spec/tests.js -o dist/tests-bundle-3d.js --debug --verbose; node dist/tests-bundle-3d.js"
 	},
