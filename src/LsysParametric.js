@@ -74,7 +74,8 @@ export class LsysParametric {
 
 		this.castRules();
 		this.castVariables();
-		this.interpolateVarsRe = new RegExp(/(\$\w+)/g);
+		this.interpolateVarsRe = /(\$\w+)/g;
+		this.str2reRe = /(\w+)\(([^\)]+)\)/g;
 
 		console.info('Variables: %O\nRules:\n%O', this.variables, this.options.rules);
 	};
@@ -204,7 +205,7 @@ export class LsysParametric {
 		const rv = str.replace(
 			this.interpolateVarsRe,
 			(match) => {
-				return (typeof this.variables[match] != 'undefined') ?
+				return (typeof this.variables[match] !== 'undefined') ?
 					this.variables[match] : match;
 			}
 		);
@@ -214,7 +215,6 @@ export class LsysParametric {
 
 	string2reAndArgNames(str) {
 		let argNames = [];
-		this.str2reRe = new RegExp(/(\w+)\(([^\)]+)\)/);
 
 		const rv = str.replace(
 			this.str2reRe,
@@ -260,22 +260,21 @@ export class LsysParametric {
 
 				// Re-write the rule to replace variables with literals, where possible:
 				const [rule2findRe, ruleArgNames] = this.string2reAndArgNames(rule[0]);
-				console.log('Rule ' + ruleNumber + ' says find ' + rule[0] + ' in content of ' + atom);
+				console.log('Rule ' + ruleNumber + ' says find ' + rule[0] + ' in content of ' + atom + ' using ', rule2findRe);
 
 				// Find the rule pattern (left-hand side of condition)
 				// and replace if condition is met
 				const atomAfterRuleApplied = atom.replace(
 					rule2findRe,
-					(original) => {
+					([original, ..._arguments]) => {
 						/*  On entering this function, a match has been found
-								but rules have yet to be tested
-							*/
+								but rules have yet to be tested */
 						// Ascribe variables
-						for (let i = 2; i < arguments.length - 2; i++) {
-							console.log("Let " + ruleArgNames[i - 2] + ' = ' + arguments[i]);
-							// Set variables with values found
-							this.variables[ruleArgNames[i - 2]] = arguments[i];
-						}
+						let i = 0;
+						_arguments.filter(str => str.match(/\d+/)).forEach((numericValue) => {
+							this.variables[ruleArgNames[i]] = numericValue;
+							i++;
+						});
 
 						// Get the rule code:
 						const ruleConditionJs = this.interploateVars(rule[1]);
