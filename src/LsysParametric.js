@@ -99,28 +99,30 @@ export class LsysParametric {
 	};
 
 	setOptions(options) {
-		var self = this;
 		options = options || {};
 		if (typeof options !== 'object') {
 			throw new TypeError('options was not an object, %O', options);
 		}
-		Object.keys(options).forEach(function (i) {
-			// Cast string
-			if (typeof options[i] === 'string' && options[i].match(
-				/^\s*[.\d+]+\s*$/)) {
-				options[i] = parseFloat(options[i]);
+		Object.keys(options).forEach((i) => {
+			if (typeof options[i] === 'string') {
+				if (options[i].match(/^\s*[.\d+]+\s*$/)) {
+					options[i] = parseFloat(options[i]);
+				}
+				else if (options[i].match(/^\d+$/)) {
+					options[i] = Number(options[i]);
+				}
 			}
-			self.options[i] = options[i];
+			this.options[i] = options[i];
 		});
 	};
 
 	castVariables(str) {
 		str = str || this.options.variables;
 		if (!str) return;
-		var rv = {};
-		str.split(/[\n\r\f]+/).forEach(function (line) {
+		let rv = {};
+		str.split(/[\n\r\f]+/).forEach((line) => {
 			// Detect
-			var name2val = line.match(/^\s*(#define)?\s*(\$\w+)\s*(\S+)\s*$/);
+			const name2val = line.match(/^\s*(#define)?\s*(\$\w+)\s*(\S+)\s*$/);
 			// Store
 			if (name2val) {
 				rv[name2val[2]] = name2val[3];
@@ -128,8 +130,7 @@ export class LsysParametric {
 				if (rv[name2val[2]].match(/^(-+)?\d+(\.\d+)?$/))
 					rv[name2val[2]] = parseFloat(rv[name2val[2]]);
 			} else {
-				throw ("Bad variable definition:\n" + name2val + "\non line: \n" +
-					line);
+				throw new Error("Bad variable definition:\n" + name2val + "\non line: \n" + line);
 			}
 		});
 		this.variables = rv;
@@ -141,27 +142,26 @@ export class LsysParametric {
 		*/
 	castRules(str) {
 		str = str || this.options.rules;
-		var rv = [];
+		const rv = [];
 
 		// F(s,o) : s == AS && o == R -> F(AS,L)F(BS,R) \n
-		str.split(/[\n\r\f]+/).forEach(function (line) {
-			if (line == '') return;
-			var head_tail = line.match(
-				/^\s*(.+?)\s*->\s*([^\n\r\f]+)\s*/
-			);
+		str.split(/[\n\r\f]+/).forEach((line) => {
+			if (line === '') {
+				return;
+			}
+			let rule = '';
+			const head_tail = line.match(/^\s*(.+?)\s*->\s*([^\n\r\f]+)\s*/);
 
 			if (head_tail != null) {
-				var match_condition = head_tail[1].match(
-					/([^:]+)\s*:?\s*(.*?)\s*$/
-				);
-				var head = match_condition[1].match(/^(.+?)\s*$/);
-				var rule = [
+				const match_condition = head_tail[1].match(/([^:]+)\s*:?\s*(.*?)\s*$/);
+				const head = match_condition[1].match(/^(.+?)\s*$/);
+				rule = [
 					head[1],
 					match_condition[2],
 					head_tail[2]
 				];
 			} else {
-				throw ('Parse error ' + line);
+				throw new Error('Parse error ' + line);
 			}
 			rv.push(rule);
 		});
@@ -180,7 +180,6 @@ export class LsysParametric {
 
 	generate(generations) {
 		this.total_generations = generations;
-
 		console.debug('Enter to create %d generations', this.total_generations);
 
 		this.content = this.options.start;
@@ -189,7 +188,7 @@ export class LsysParametric {
 		for (
 			this.generation = 1; this.generation <= this.total_generations; this.generation++
 		) {
-			this.apply_rules();
+			this.applyRules();
 			console.info(this.content);
 		}
 
@@ -202,12 +201,11 @@ export class LsysParametric {
 	};
 
 	interploateVars(str) {
-		var self = this;
-		var rv = str.replace(
+		const rv = str.replace(
 			this.interpolateVarsRe,
-			function (match) {
-				return (typeof self.variables[match] != 'undefined') ?
-					self.variables[match] : match;
+			(match) => {
+				return (typeof this.variables[match] != 'undefined') ?
+					this.variables[match] : match;
 			}
 		);
 		console.log('Interpolate vars: %s ... %s', str, rv);
@@ -215,16 +213,15 @@ export class LsysParametric {
 	};
 
 	string2reAndArgNames(str) {
-		var self = this;
-		var argNames = [];
+		let argNames = [];
 		this.str2reRe = new RegExp(/(\w+)\(([^\)]+)\)/);
 
-		var rv = str.replace(
+		const rv = str.replace(
 			this.str2reRe,
-			function (match, varname, argsCsv) {
+			(match, varname, argsCsv) => {
 				argNames = argsCsv.split(/\s*,\s*/);
 				// Could cache these based on args.length:
-				return '(' + varname + ')\\(' + argNames.map(function () {
+				return '(' + varname + ')\\(' + argNames.map(() => {
 					return '([\\$\\w-]+)'
 				}) + '\\)';
 			}
@@ -236,25 +233,24 @@ export class LsysParametric {
 		];
 	};
 
-	apply_rules() {
-		var self = this;
-		console.debug('Enter apply_rules for generation ' + this.generation);
-		var finalContent = '';
+	applyRules() {
+		console.debug('Enter applyRules for generation ' + this.generation);
+		let finalContent = '';
 
 		// Itterate over atoms within the content?
-		var atoms = self.content.match(/(.(\([^)]+\))?)/g);
-		if (self.content != atoms.join('')) {
-			console.ERROR(atoms);
-			console.ERROR('atoms ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
-			alert('Atomic regex failed, results will be wrong');
+		const atoms = this.content.match(/(.(\([^)]+\))?)/g);
+		if (this.content != atoms.join('')) {
+			console.error(atoms);
+			console.error('atoms ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
+			throw new Error('Atomic regex failed, results would be wrong');
 		}
 
-		atoms.forEach(function (atom) {
+		atoms.forEach((atom) => {
 			// Run production rules:
-			var ruleNumber = 0;
-			var ruleSuccessfullyApplied = false;
+			let ruleNumber = 0;
+			let ruleSuccessfullyApplied = false;
 
-			self.options.rules.forEach(function (rule) {
+			this.options.rules.forEach((rule) => {
 				ruleNumber++;
 
 				if (ruleSuccessfullyApplied) {
@@ -263,36 +259,38 @@ export class LsysParametric {
 				}
 
 				// Re-write the rule to replace variables with literals, where possible:
-				var _ = self.string2reAndArgNames(rule[0]);
-				var rule2findRe = _[0];
-				var ruleArgNames = _[1];
-				console.log('Rule ' + ruleNumber + ' says find ' + rule[0] +
-					' in content of ' + atom);
+				const [rule2findRe, ruleArgNames] = this.string2reAndArgNames(rule[0]);
+				console.log('Rule ' + ruleNumber + ' says find ' + rule[0] + ' in content of ' + atom);
 
 				// Find the rule pattern (left-hand side of condition)
 				// and replace if condition is met
-				var atomAfterRuleApplied = atom.replace(
+				const atomAfterRuleApplied = atom.replace(
 					rule2findRe,
-					function replacement(original) {
+					(original) => {
 						/*  On entering this function, a match has been found
 								but rules have yet to be tested
 							*/
 						// Ascribe variables
-						for (var i = 2; i < arguments.length - 2; i++) {
-							console.log("Let " + ruleArgNames[i - 2] + ' = ' + arguments[
-								i]);
+						for (let i = 2; i < arguments.length - 2; i++) {
+							console.log("Let " + ruleArgNames[i - 2] + ' = ' + arguments[i]);
 							// Set variables with values found
-							self.variables[ruleArgNames[i - 2]] = arguments[i];
+							this.variables[ruleArgNames[i - 2]] = arguments[i];
 						}
 
 						// Get the rule code:
-						var ruleConditionJs = self.interploateVars(rule[1]);
-						console.log('Rule ' + ruleNumber + ' condition: ' +
-							ruleConditionJs);
+						const ruleConditionJs = this.interploateVars(rule[1]);
+						console.log('Rule ' + ruleNumber + ' condition: ' + ruleConditionJs);
 
 						// Decide if the substitution take place
-						var ruleConditionMet = ruleConditionJs.length == 0 ?
-							true : eval(ruleConditionJs);
+						let ruleConditionMet = ruleConditionJs.length === 0; // || eval ruleConditionMet
+
+						if (!ruleConditionMet) {
+							try {
+								ruleConditionMet = eval(ruleConditionJs);
+							} catch (e) {
+								console.warn(e);
+							}
+						}
 
 						// No substitutions
 						if (!ruleConditionMet) {
@@ -301,11 +299,8 @@ export class LsysParametric {
 						}
 
 						ruleSuccessfullyApplied = true;
-						var substituted = self.interploateVars(rule[2]);
-						console.log(
-							'Condition met:------> substituted result = ' + rule[2] +
-							'  RV== ' + substituted
-						);
+						const substituted = this.interploateVars(rule[2]);
+						console.log('Condition met:------> substituted result = ' + rule[2] + '  RV== ' + substituted);
 
 						return substituted;
 					} // end of replacement function
@@ -315,8 +310,7 @@ export class LsysParametric {
 				// do not write this into the string:
 				if (ruleSuccessfullyApplied) {
 					atom = atomAfterRuleApplied;
-					console.log('After fulfilled rule ' + ruleNumber +
-						' was applied, atom is: ' + atom);
+					console.log('After fulfilled rule ' + ruleNumber + ' was applied, atom is: ' + atom);
 					return;
 				}
 
@@ -325,24 +319,24 @@ export class LsysParametric {
 			finalContent += atom;
 		}); // Next atom
 
-		self.content = finalContent;
+		this.content = finalContent;
 
-		console.log('After all rules were applied, content is: ', self.content);
+		console.log('After all rules were applied, content is: ', this.content);
 		console.log(
 			'# FINAL for generation ' + this.generation + '/' + this.total_generations +
-			' ############################ Content: ' + self.content
+			' ############################ Content: ' + this.content
 		);
 	};
 
 	render() {
-		var dir = 0;
-		var states = [];
+		let dir = 0;
+		const states = [];
 
 		this.stepped = 0;
 
 		// PRODUCTION_RULES:
-		for (var i = 0; i < this.content.length; i++) {
-			var draw = true;
+		for (let i = 0; i < this.content.length; i++) {
+			let draw = true;
 			this.penUp = false;
 			// console.log('Do '+i);
 			switch (this.content.charAt(i)
@@ -371,7 +365,7 @@ export class LsysParametric {
 					break;
 				// End a branch
 				case ']':
-					var state = states.pop();
+					const state = states.pop();
 					dir = state[0];
 					this.x = state[1];
 					this.y = state[2];
@@ -440,16 +434,16 @@ export class LsysParametric {
 	resize() {
 		console.debug('Min: %d , %d', this.min_x, this.min_y);
 		console.debug('Max: %d , %d', this.max_x, this.max_y);
-		var wi = (this.min_x < 0) ?
+		const wi = (this.min_x < 0) ?
 			Math.abs(this.min_x) + Math.abs(this.max_x) : this.max_x - this.min_x;
-		var hi = (this.min_y < 0) ?
+		const hi = (this.min_y < 0) ?
 			Math.abs(this.min_y) + Math.abs(this.max_y) : this.max_y - this.min_y;
 		if (this.max_y <= 0 || this.max_x <= 0) {
 			throw new RangeError('Max_x or max_y out of bounds');
 		}
 
-		var sx = this.options.canvas.width / wi,
-			sy = this.options.canvas.height / hi;
+		const sx = this.options.canvas.width / wi;
+		const sy = this.options.canvas.height / hi;
 
 		if (this.options.clearCanvas) {
 			this.options.canvas.width = this.options.canvas.width;
