@@ -181,7 +181,7 @@ export class LsysParametric {
 
 	generate(generations) {
 		this.total_generations = generations;
-		console.debug('Enter to create %d generations', this.total_generations);
+		console.debug('Enter generate to create %d generations', this.total_generations);
 
 		this.content = this.options.start;
 		this.content = this.interploateVars(this.content);
@@ -190,7 +190,6 @@ export class LsysParametric {
 			this.generation = 1; this.generation <= this.total_generations; this.generation++
 		) {
 			this.applyRules();
-			console.info(this.content);
 		}
 
 		this.render();
@@ -293,7 +292,7 @@ export class LsysParametric {
 
 						// No substitutions
 						if (!ruleConditionMet) {
-							console.log('Condition not met');
+							console.debug('Condition not met');
 							return original;
 						}
 
@@ -320,7 +319,7 @@ export class LsysParametric {
 
 		this.content = finalContent;
 
-		console.log('After all rules were applied, content is: ', this.content);
+		console.debug('After all rules were applied, content is: ', this.content);
 		console.log(
 			'# FINAL for generation ' + this.generation + '/' + this.total_generations +
 			' ############################ Content: ' + this.content
@@ -379,17 +378,14 @@ export class LsysParametric {
 				this.stepped++;
 			}
 		}
-		console.info('Leave default_generate_callback');
 	};
 
 	finalise() {
-		if (this.options.finally
-			&& typeof this.options.finally === 'function'
-		) {
+		if (this.options.finally && typeof this.options.finally === 'function') {
 			this.options.finally.call(this);
 		}
 		this.resize();
-		console.info('Finalised');
+		console.debug('Finalised');
 	};
 
 	turtle_graph(dir) {
@@ -431,14 +427,16 @@ export class LsysParametric {
 	};
 
 	resize() {
-		console.debug('Min: %d , %d', this.min_x, this.min_y);
-		console.debug('Max: %d , %d', this.max_x, this.max_y);
+		console.debug('Min: %d , %d\nMax: %d , %d', this.min_x, this.min_y, this.max_x, this.max_y);
 		const wi = (this.min_x < 0) ?
 			Math.abs(this.min_x) + Math.abs(this.max_x) : this.max_x - this.min_x;
 		const hi = (this.min_y < 0) ?
 			Math.abs(this.min_y) + Math.abs(this.max_y) : this.max_y - this.min_y;
-		if (this.max_y <= 0 || this.max_x <= 0) {
-			throw new RangeError('Max_x or max_y out of bounds');
+		if (this.max_y <= 0) {
+			throw new RangeError('max_y out of bounds');
+		}
+		if (this.max_x <= 0) {
+			throw new RangeError('max_x out of bounds');
 		}
 
 		const sx = this.options.canvas.width / wi;
@@ -455,6 +453,6 @@ export class LsysParametric {
 		this.y -= this.min_y;
 
 		this.render();
-		console.debug('Resized');
+		console.debug('Resized via scale %d, %d', sx, sy);
 	};
 }
