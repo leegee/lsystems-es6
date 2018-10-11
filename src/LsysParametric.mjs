@@ -34,19 +34,19 @@ export class LsysParametric {
 		start: 'F',
 		variables: '',
 		rules: null,
-		merge_duplicates: 1,
+		mergeDuplicates: 1,
 		duration: 48,
 		scale: 'pentatonic',
-		initial_note_decimal: 58,
-		canvas_width: 2000,
-		canvas_height: 800,
+		initialNoteDecimal: 58,
+		canvasWidth: 2000,
+		canvasHeight: 800,
 		angle: 30,
-		turtle_step_x: 10,
-		turtle_step_y: 10,
-		init_x: null,
-		init_y: null,
-		line_width: 1,
-		time_scale_lines: 1,
+		turtleStepX: 10,
+		turtleStepY: 10,
+		initX: null,
+		initY: null,
+		lineWidth: 1,
+		timeScaleLines: 1,
 		clearCanvas: true,
 		colours: [
 			"rgba(130,  90, 70, 0.8)",
@@ -62,14 +62,14 @@ export class LsysParametric {
 		this.xoffset = 0;
 		this.yoffset = 0;
 		this.generation = 0;
-		this.total_generations = null;
+		this.totalGenerations = null;
 		this.variables = null;
 		this.interpolateVarsRe = null;
 
 		this.initialize();
 
-		this.x = this.max_x = this.min_x = this.options.init_x || 0;
-		this.y = this.max_y = this.min_y = this.options.init_y || 0;
+		this.x = this.maxX = this.minX = this.options.initX || 0;
+		this.y = this.maxY = this.minY = this.options.initY || 0;
 		this.content = '';
 
 		this.castRules();
@@ -92,9 +92,7 @@ export class LsysParametric {
 		// Translate context to center of canvas:
 		this.ctx.translate(this.options.canvas.width / 2, this.options.canvas.height / 2);
 		// Flip context vertically
-		if (this.options.initially
-			&& typeof this.options.initially === 'function'
-		) {
+		if (this.options.initially && typeof this.options.initially === 'function' ) {
 			this.options.initially.call(this);
 		}
 	};
@@ -128,8 +126,9 @@ export class LsysParametric {
 			if (name2val) {
 				rv[name2val[2]] = name2val[3];
 				// Cast
-				if (rv[name2val[2]].match(/^(-+)?\d+(\.\d+)?$/))
+				if (rv[name2val[2]].match(/^(-+)?\d+(\.\d+)?$/)) {
 					rv[name2val[2]] = parseFloat(rv[name2val[2]]);
+				}
 			} else {
 				throw new Error("Bad variable definition:\n" + name2val + "\non line: \n" + line);
 			}
@@ -141,25 +140,25 @@ export class LsysParametric {
 	/* Creates a strucure as follows:
 		[ [to_match, condition, substitution ], ...]
 		*/
-	castRules(str) {
-		str = str || this.options.rules;
+	castRules(strRules) {
+		strRules = strRules || this.options.rules;
 		const rv = [];
 
 		// F(s,o) : s == AS && o == R -> F(AS,L)F(BS,R) \n
-		str.split(/[\n\r\f]+/).forEach((line) => {
+		strRules.split(/[\n\r\f]+/).forEach((line) => {
 			if (line === '') {
 				return;
 			}
 			let rule = '';
-			const head_tail = line.match(/^\s*(.+?)\s*->\s*([^\n\r\f]+)\s*/);
+			const headTail = line.match(/^\s*(.+?)\s*->\s*([^\n\r\f]+)\s*/);
 
-			if (head_tail != null) {
-				const match_condition = head_tail[1].match(/([^:]+)\s*:?\s*(.*?)\s*$/);
-				const head = match_condition[1].match(/^(.+?)\s*$/);
+			if (headTail != null) {
+				const matchCondition = headTail[1].match(/([^:]+)\s*:?\s*(.*?)\s*$/);
+				const head = matchCondition[1].match(/^(.+?)\s*$/);
 				rule = [
 					head[1],
-					match_condition[2],
-					head_tail[2]
+					matchCondition[2],
+					headTail[2]
 				];
 			} else {
 				throw new Error('Parse error ' + line);
@@ -180,14 +179,14 @@ export class LsysParametric {
 	};
 
 	generate(generations) {
-		this.total_generations = generations;
-		console.debug('Enter generate to create %d generations', this.total_generations);
+		this.totalGenerations = generations;
+		console.debug('Enter generate to create %d generations', this.totalGenerations);
 
 		this.content = this.options.start;
 		this.content = this.interploateVars(this.content);
 
 		for (
-			this.generation = 1; this.generation <= this.total_generations; this.generation++
+			this.generation = 1; this.generation <= this.totalGenerations; this.generation++
 		) {
 			this.applyRules();
 		}
@@ -321,7 +320,7 @@ export class LsysParametric {
 
 		console.debug('After all rules were applied, content is: ', this.content);
 		console.log(
-			'# FINAL for generation ' + this.generation + '/' + this.total_generations +
+			'# FINAL for generation ' + this.generation + '/' + this.totalGenerations +
 			' ############################ Content: ' + this.content
 		);
 	};
@@ -332,7 +331,7 @@ export class LsysParametric {
 
 		this.stepped = 0;
 
-		// PRODUCTION_RULES:
+		// PRODUCTION RULES:
 		for (let i = 0; i < this.content.length; i++) {
 			let draw = true;
 			this.penUp = false;
@@ -374,34 +373,36 @@ export class LsysParametric {
 			};
 
 			if (draw) {
-				this.turtle_graph(dir);
+				this.turtleGraph(dir);
 				this.stepped++;
 			}
 		}
 	};
 
 	finalise() {
+		console.debug('Enter finalise');
 		if (this.options.finally && typeof this.options.finally === 'function') {
+			console.debug('Call finally');
 			this.options.finally.call(this);
 		}
 		this.resize();
-		console.debug('Finalised');
+		console.debug('Leave finalise');
 	};
 
-	turtle_graph(dir) {
+	turtleGraph(dir) {
 		// console.debug('Move '+dir +' from '+this.x+','+this.y);
 
 		this.ctx.beginPath();
-		if (this.options.time_scale_lines > 0) {
-			this.ctx.lineWidth = this.options.line_width;
+		if (this.options.timeScaleLines > 0) {
+			this.ctx.lineWidth = this.options.lineWidth;
 		}
-		else if (this.options.line_width) {
-			this.ctx.lineWidth = this.options.line_width;
+		else if (this.options.lineWidth) {
+			this.ctx.lineWidth = this.options.lineWidth;
 		}
 		this.ctx.moveTo(this.x, this.y);
 
-		this.x += (this.dcos(dir) * this.options.turtle_step_x);
-		this.y += (this.dsin(dir) * this.options.turtle_step_y);
+		this.x += (this.dcos(dir) * this.options.turtleStepX);
+		this.y += (this.dsin(dir) * this.options.turtleStepY);
 
 		this.x += this.xoffset;
 		this.y += this.yoffset;
@@ -410,10 +411,10 @@ export class LsysParametric {
 		this.ctx.closePath();
 		if (!this.penUp) this.ctx.stroke();
 
-		if (this.x > this.max_x) this.max_x = this.x;
-		if (this.y > this.max_y) this.max_y = this.y;
-		if (this.x < this.min_x) this.min_x = this.x;
-		if (this.y < this.min_y) this.min_y = this.y;
+		if (this.x > this.maxX) this.maxX = this.x;
+		if (this.y > this.maxY) this.maxY = this.y;
+		if (this.x < this.minX) this.minX = this.x;
+		if (this.y < this.minY) this.minY = this.y;
 		// console.debug('...to '+this.x+','+this.y);
 	};
 
@@ -427,32 +428,36 @@ export class LsysParametric {
 	};
 
 	resize() {
-		console.debug('Min: %d , %d\nMax: %d , %d', this.min_x, this.min_y, this.max_x, this.max_y);
-		const wi = (this.min_x < 0) ?
-			Math.abs(this.min_x) + Math.abs(this.max_x) : this.max_x - this.min_x;
-		const hi = (this.min_y < 0) ?
-			Math.abs(this.min_y) + Math.abs(this.max_y) : this.max_y - this.min_y;
-		if (this.max_y <= 0) {
-			throw new RangeError('max_y out of bounds');
+		console.debug('Min: %d , %d\nMax: %d , %d', this.minX, this.minY, this.maxX, this.maxY);
+		const wi = (this.minX < 0) ?
+			Math.abs(this.minX) + Math.abs(this.maxX) : this.maxX - this.minX;
+		const hi = (this.minY < 0) ?
+			Math.abs(this.minY) + Math.abs(this.maxY) : this.maxY - this.minY;
+		if (this.maxY <= 0) {
+			throw new RangeError('maxY out of bounds');
 		}
-		if (this.max_x <= 0) {
-			throw new RangeError('max_x out of bounds');
+		if (this.maxX <= 0) {
+			throw new RangeError('maxX out of bounds');
 		}
 
 		const sx = this.options.canvas.width / wi;
 		const sy = this.options.canvas.height / hi;
 
-		if (this.options.clearCanvas) {
-			this.options.canvas.width = this.options.canvas.width;
+		if (sx !== 0 && sy !== 0) {
+
+			if (this.options.clearCanvas) {
+				this.options.canvas.width = this.options.canvas.width;
+			}
+
+			this.ctx.scale(sx, sy);
+
+			this.x = this.options.initX || 0; // this.options.turtleStepX|| 0;
+			this.y = this.options.initY || this.options.canvasHeight / 2;
+			this.y -= this.minY;
+
+			this.render();
+			console.debug('Resized via scale %d, %d', sx, sy);
 		}
-
-		this.ctx.scale(sx, sy);
-
-		this.x = this.options.init_x || 0; // this.options.turtle_step_x || 0;
-		this.y = this.options.init_y || this.options.canvas_height / 2;
-		this.y -= this.min_y;
-
-		this.render();
-		console.debug('Resized via scale %d, %d', sx, sy);
+		console.debug('Leave resize');
 	};
 }
